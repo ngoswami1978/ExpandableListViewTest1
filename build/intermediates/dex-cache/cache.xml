@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\release\classes-4a555a446f60767e612a833b4f478294662e33e9.jar" />
+    </item>
+    <item
+        jar="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\release\internal_impl-23.0.1-7c1c402c2cbd27b6193f1b068730e52a3db3c6e3.jar" />
+    </item>
+    <item
+        jar="D:\android-sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\release\support-annotations-23.0.1-30988f1fe36b09fe750ef342667175c0af8e1dc8.jar" />
+    </item>
+    <item
+        jar="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\release\classes-feb25cb96ce2fe16cfdf3f1c6f3b9f488b378307.jar" />
+    </item>
+    <item
+        jar="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\exploded-aar\com.mcxiaoke.volley\library-aar\1.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="e40b9a81989bd4a846018551c280f8c4d837bf2e">
+        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\release\classes-36689981e66f2057d505d9e47ac467e63a3cb167.jar" />
+    </item>
+
+</items>

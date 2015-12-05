@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/feed_bg"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/header_Id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/link"
+        android:textSize="@dimen/feed_item_timestamp"
+        android:paddingLeft="5sp"
+        android:textStyle="bold"
+        android:text="Srno"/>
+
+    <TextView
+        android:id="@+id/header_FlatNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/link"
+        android:layout_toRightOf="@id/header_Id"
+        android:textSize="@dimen/feed_item_timestamp"
+        android:paddingLeft="5sp"
+        android:textStyle="bold"
+        android:text="Flat"/>
+
+    <TextView
+        android:id="@+id/header_FlatType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/header_FlatNo"
+        android:textColor="@color/link"
+        android:paddingLeft="5sp"
+        android:text="FlatType"
+        android:textStyle="bold"
+        android:textSize="@dimen/feed_item_timestamp"/>
+
+    <TextView
+        android:id="@+id/header_FlatOwner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/header_FlatType"
+        android:textColor="@color/link"
+        android:paddingLeft="40sp"
+        android:text="Owner"
+        android:textSize="@dimen/feed_item_timestamp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/header_OwnerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_FlatOwner"
+        android:paddingLeft="110sp"
+        android:textColor="@color/link"
+        android:text="Name"
+        android:textSize="@dimen/feed_item_timestamp"/>
+
+    <TextView
+        android:id="@+id/header_OwnerContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_FlatOwner"
+        android:paddingLeft="150sp"
+        android:textColor="@color/link"
+        android:text="Contact"
+        android:textSize="@dimen/feed_item_timestamp"/>
+
+    <TextView
+        android:id="@+id/header_FlatRenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/header_FlatOwner"
+        android:textColor="@color/link"
+        android:paddingLeft="60sp"
+        android:text="Renter"
+        android:textSize="@dimen/feed_item_timestamp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/header_RenterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_FlatRenter"
+        android:paddingLeft="198sp"
+        android:textColor="@color/link"
+        android:text="Name"
+        android:textSize="@dimen/feed_item_timestamp"/>
+
+    <TextView
+        android:id="@+id/header_RenterContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_FlatRenter"
+        android:paddingLeft="238sp"
+        android:textColor="@color/link"
+        android:text="Contact"
+        android:textSize="@dimen/feed_item_timestamp"/>
+
+    <TextView
+        android:id="@+id/header_MnthYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/header_FlatRenter"
+        android:textColor="@color/link"
+        android:paddingLeft="38sp"
+        android:text="Mnth-Yr"
+        android:textStyle="bold"
+        android:textSize="@dimen/feed_item_timestamp"/>
+
+    <TextView
+        android:id="@+id/header_AmtPaid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/link"
+        android:paddingLeft="338sp"
+        android:text="Amt Paid"
+        android:textStyle="bold"
+        android:textSize="@dimen/feed_item_timestamp"/>
+
+    <TextView
+        android:id="@+id/mta_SrNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_RenterContact"
+        android:paddingLeft="5sp"
+        android:text="1."
+        android:textColor="@color/timestamp"
+        android:textSize="@dimen/feed_item_rowstamp"/>
+    <TextView
+        android:id="@+id/mta_FlatNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/mta_SrNo"
+        android:layout_below="@+id/header_RenterContact"
+        android:paddingLeft="20sp"
+        android:text="F3"
+        android:textColor="@color/timestamp"
+        android:textSize="@dimen/feed_item_rowstamp"/>
+    <TextView
+        android:id="@+id/mta_FlatType"
+        android:layout_width="35dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/mta_FlatNo"
+        android:layout_below="@+id/header_RenterContact"
+        android:paddingLeft="10sp"
+        android:text="1-BHK"
+        android:textColor="@color/timestamp"
+        android:textSize="@dimen/feed_item_rowstamp"/>
+    <TextView
+        android:id="@+id/mta_FlatOwnerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/mta_FlatType"
+        android:layout_below="@+id/header_OwnerName"
+        android:paddingLeft="10sp"
+        android:paddingRight="0sp"
+        android:text="Neeraj Goswami"
+        android:textColor="@color/timestamp"
+        android:textSize="@dimen/feed_item_rowstamp"
+        android:layout_alignRight="@+id/header_OwnerName"
+        android:layout_alignEnd="@+id/header_OwnerContact"  />
+    <TextView
+        android:id="@+id/mta_FlatOwnerContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/mta_FlatOwnerName"
+        android:layout_below="@+id/header_OwnerContact"
+        android:paddingLeft="8sp"
+        android:paddingRight="0sp"
+        android:text="9899846293"
+        android:textColor="@color/timestamp"
+        android:textSize="@dimen/feed_item_rowstamp"
+        android:layout_alignRight="@+id/header_OwnerContact"
+        android:layout_alignEnd="@+id/header_OwnerContact" />
+
+    <TextView
+        android:id="@+id/mta_FlatRenterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_RenterName"
+        android:paddingLeft="10sp"
+        android:paddingRight="0sp"
+        android:text="Upender Tanwar"
+        android:textColor="@color/timestamp"
+        android:textSize="@dimen/feed_item_rowstamp"
+        android:layout_alignRight="@+id/header_RenterName"
+        android:layout_alignEnd="@+id/header_RenterContact"
+        android:layout_toRightOf="@+id/header_OwnerContact"
+         />
+    <TextView
+        android:id="@+id/mta_FlatRenterContact"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_RenterContact"
+        android:paddingLeft="10sp"
+        android:paddingRight="0sp"
+        android:text="989546923"
+        android:textColor="@color/timestamp"
+        android:textSize="@dimen/feed_item_rowstamp"
+        android:layout_toRightOf="@+id/header_RenterName"
+        android:layout_alignRight="@+id/header_RenterContact"
+        android:layout_alignEnd="@+id/header_RenterContact"/>
+
+    <TextView
+        android:id="@+id/mta_MonthYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_RenterContact"
+        android:layout_toRightOf="@id/mta_FlatRenterContact"
+        android:paddingLeft="20sp"
+        android:text="Sep-2015"
+        android:textColor="@color/timestamp"
+        android:textSize="@dimen/feed_item_rowstamp"
+        android:layout_alignRight="@+id/header_MnthYear"
+        android:layout_alignEnd="@+id/header_MnthYear" />
+    <TextView
+        android:id="@+id/mta_AmtPaid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/header_RenterContact"
+        android:textColor="@color/timestamp"
+        android:paddingLeft="20sp"
+        android:text="1200"
+        android:textSize="@dimen/feed_item_rowstamp"
+        android:layout_alignRight="@+id/header_AmtPaid"
+        android:layout_alignEnd="@+id/header_AmtPaid"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/feed_item_border"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/header_RenterContact"
+        android:background="@color/feed_item_border"/>
+</RelativeLayout>
