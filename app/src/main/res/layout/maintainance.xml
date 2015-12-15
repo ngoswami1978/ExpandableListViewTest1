@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/date_time"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#b30000"
+    android:orientation="vertical">
+
+    <HorizontalScrollView
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:layout_gravity="center">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:text="Pay Maintainance  "
+                    android:gravity="center"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:textAlignment="center"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center|center_vertical"
+                    android:textSize="15sp"
+                    android:fontFamily="@string/abc_action_bar_home_description_format"
+
+                    android:background="@drawable/textviewrightborder"
+                    android:textColor="@color/white"
+                    android:id="@+id/tvpayMain" />
+
+                <ImageView
+                    android:src="@drawable/paymentcard"
+                    android:layout_width="150dp"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/imagePay"
+                    android:padding="15dp" />
+
+                <ImageView
+                    android:src="@drawable/jan"
+                    android:layout_width="150dp"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/imageView2"
+                    android:padding="15dp" />
+
+                <ImageView
+                    android:src="@drawable/feb"
+                    android:layout_width="125dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/imageView3"
+                    android:layout_gravity="center"
+                    android:padding="15dp"/>
+                <ImageView
+                    android:src="@drawable/mar"
+                    android:layout_width="125dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/imageView4"
+                    android:layout_gravity="center"
+                    android:padding="15dp"/>
+                <ImageView
+                    android:src="@drawable/apr"
+                    android:layout_width="125dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/imageView5"
+                    android:layout_gravity="center"
+                    android:padding="15dp" />
+
+                <ImageView
+                    android:src="@drawable/may"
+                    android:layout_width="125dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/imageView6"
+                    android:layout_gravity="center"
+                    android:padding="15dp"/>
+                <ImageView
+                    android:src="@drawable/jun"
+                    android:layout_width="125dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/imageView7"
+                    android:layout_gravity="center"
+                    android:padding="15dp"/>
+                <ImageView
+                    android:src="@drawable/jul"
+                    android:layout_width="125dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/imageView8"
+                    android:layout_gravity="center"
+                    android:padding="15dp"/>
+                <ImageView
+                    android:src="@drawable/aug"
+                    android:layout_width="125dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/imageView9"
+                    android:layout_gravity="center"
+                    android:padding="15dp"/>
+                <ImageView
+                    android:src="@drawable/sep"
+                    android:layout_width="125dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/imageView10"
+                    android:layout_gravity="center"
+                    android:padding="15dp"/>
+                <ImageView
+                    android:src="@drawable/oct"
+                    android:layout_width="125dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/imageView11"
+                    android:layout_gravity="center"
+                    android:padding="15dp"/>
+                <ImageView
+                    android:src="@drawable/nov"
+                    android:layout_width="125dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/imageView12"
+                    android:layout_gravity="center"
+                    android:padding="15dp"/>
+                <ImageView
+                    android:src="@drawable/dec"
+                    android:layout_width="125dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/imageView13"
+                    android:layout_gravity="center"
+                    android:padding="15dp"/>
+
+
+            </LinearLayout>
+
+    </HorizontalScrollView>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#b30000"
+        tools:context="me.vable.android.viewandlayoutlessons.FrameLayoutExampleActivity">
+
+
+        <TextView
+            android:id="@+id/tvDispMaint1"
+            android:text="JUL 2015"
+            android:textColor="@color/text_color"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@drawable/textviewleftborder"
+            android:drawableRight="@drawable/shape_july"
+            android:layout_gravity="right|bottom"/>
+
+        <TextView
+            android:id="@+id/tvDispMaint2"
+            android:text="AUG 2015"
+            android:textColor="@color/text_color"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/textviewtopborder"
+            android:layout_gravity="left|bottom"
+            android:drawableLeft="@drawable/shape_aug"
+            />
+
+        <TextView
+            android:id="@+id/tvDispMaint3"
+            android:text="OCT 2015"
+            android:textColor="@color/text_color"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/textviewleftborder"
+            android:layout_gravity="right|center_vertical"
+            android:drawableRight="@drawable/shape_october"
+            />
+
+        <TextView
+            android:id="@+id/tvDispMaint4"
+            android:text="SEP 2015"
+            android:textColor="@color/text_color"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@drawable/textviewtopborder"
+            android:layout_gravity="left|center_vertical"
+            android:textIsSelectable="false"
+            android:drawableLeft="@drawable/shape_sep"
+            />
+
+
+        <TextView
+            android:id="@+id/tvDispMaint5"
+            android:text="NOV 2015"
+            android:textColor="@color/text_color"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:background="@drawable/textviewleftborder"
+            android:layout_gravity="right|center_horizontal"
+            android:textIsSelectable="false"
+            android:drawableRight="@drawable/shape_nov"
+            />
+
+        <TextView
+            android:id="@+id/tvDispMaint6"
+            android:text="DEC 2015"
+            android:textColor="@color/text_color"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/textviewrightborder"
+            android:layout_gravity="left|center_horizontal"
+            android:textIsSelectable="false"
+            android:allowUndo="false"
+            android:clickable="false"
+            android:drawableLeft="@drawable/shape_dec"/>
+    </FrameLayout>
+</LinearLayout>

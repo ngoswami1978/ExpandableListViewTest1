@@ -1,0 +1,73 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <EditText
+        android:drawableLeft="@drawable/currency_sign_rupee_pencil"
+        android:hint="Enter the amount"
+        android:id="@+id/editAmt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:digits="0123456789"
+        android:inputType="number"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:textSize="10dp"
+        android:paddingTop="10sp"
+        android:paddingLeft="8sp"
+        android:text="Select Flat"/>
+
+    <Spinner
+        android:id="@+id/my_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/ownername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="6sp"
+        android:textColor="@color/timestamp"
+        android:layout_below="@+id/my_spinner"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/rentername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="6sp"
+        android:textColor="@color/timestamp"
+        android:layout_below="@+id/ownername"
+        android:textStyle="italic" />
+
+    <TextView
+        android:id="@+id/flatnumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="6sp"
+        android:textColor="@color/timestamp"
+        android:layout_below="@+id/rentername"
+        android:textStyle="italic" />
+    <TextView
+        android:id="@+id/last_timeamountdeposited_datetime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="6sp"
+        android:textColor="@color/timestamp"
+        android:layout_below="@+id/flatnumber"
+        android:textStyle="italic" />
+    <TextView
+        android:id="@+id/last_timeamountdeposited"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="6sp"
+        android:textColor="@color/timestamp"
+        android:layout_below="@+id/last_timeamountdeposited_datetime"
+        android:textStyle="italic" />
+</LinearLayout>
