@@ -44,6 +44,7 @@
         android:paddingLeft="6sp"
         android:textColor="@color/timestamp"
         android:layout_below="@+id/ownername"
+        android:visibility="invisible"
         android:textStyle="italic" />
 
     <TextView
@@ -52,22 +53,73 @@
         android:layout_height="wrap_content"
         android:paddingLeft="6sp"
         android:textColor="@color/timestamp"
+        android:visibility="invisible"
         android:layout_below="@+id/rentername"
         android:textStyle="italic" />
+
     <TextView
-        android:id="@+id/last_timeamountdeposited_datetime"
+        android:id="@+id/fltdiscription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="6sp"
+        android:paddingBottom="10sp"
         android:textColor="@color/timestamp"
         android:layout_below="@+id/flatnumber"
+        android:text="@string/FlatdescriptionwithLastTransaction"
+        android:textStyle="italic" />
+
+    <LinearLayout
+        android:id="@+id/descSeperator"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="@color/timestamp"
+        android:layout_height="1sp"></LinearLayout>
+
+    <TextView
+        android:id="@+id/lastPaidEntrydt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="6sp"
+        android:paddingTop="6sp"
+        android:text="Date : "
+        android:textColor="@color/timestamp"
+        android:layout_below="@+id/fltdiscription"
         android:textStyle="italic" />
     <TextView
-        android:id="@+id/last_timeamountdeposited"
+        android:id="@+id/lastPaidMonth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="6sp"
         android:textColor="@color/timestamp"
-        android:layout_below="@+id/last_timeamountdeposited_datetime"
+        android:layout_below="@+id/lastPaidEntrydt"
+        android:text="Month : "
         android:textStyle="italic" />
+    <TextView
+        android:id="@+id/lastPaidYear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="6sp"
+        android:textColor="@color/timestamp"
+        android:text="Year :"
+        android:layout_below="@+id/lastPaidMonth"
+        android:textStyle="italic" />
+    <TextView
+        android:id="@+id/lastPaidAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="6sp"
+        android:text="Amount : "
+        android:textColor="@color/timestamp"
+        android:layout_below="@+id/lastPaidYear"
+        android:textStyle="italic" />
+    <TextView
+        android:id="@+id/lastPaidby"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="6sp"
+        android:text="paid by : "
+        android:textColor="@color/timestamp"
+        android:layout_below="@+id/lastPaidAmount"
+        android:textStyle="italic" />
+
 </LinearLayout>

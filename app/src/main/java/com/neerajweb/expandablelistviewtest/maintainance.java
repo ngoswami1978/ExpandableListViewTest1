@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -59,10 +60,18 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
     TextView txtownername;
     TextView txtrentername;
     TextView txtflatnumber;
-    TextView txtlast_timeamountdeposited_datetime;
-    TextView txtlast_timeamountdeposited ;
+
+    TextView txtlastPaidMonth;
+    TextView txtlastPaidYear;
+    TextView txtlastPaidAmount;
+    TextView txtlastPaidEntrydt;
+    TextView txtfltdiscription;
+    TextView txtlastPaidby;
+    LinearLayout descSeperator;
 
     String Error = null;
+    String flatDescription;
+    String renterName;
     boolean isSpinnerInitial ;
     View dialogView=null;
 
@@ -251,8 +260,24 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
             txtownername = (TextView) dialogView.findViewById(R.id.ownername);
             txtrentername = (TextView) dialogView.findViewById(R.id.rentername);
             txtflatnumber = (TextView) dialogView.findViewById(R.id.flatnumber);
-            txtlast_timeamountdeposited_datetime = (TextView) dialogView.findViewById(R.id.last_timeamountdeposited_datetime);
-            txtlast_timeamountdeposited = (TextView) dialogView.findViewById(R.id.last_timeamountdeposited);
+
+            txtfltdiscription = (TextView) dialogView.findViewById(R.id.fltdiscription);
+            txtlastPaidEntrydt= (TextView) dialogView.findViewById(R.id.lastPaidEntrydt);;
+            txtlastPaidMonth=(TextView) dialogView.findViewById(R.id.lastPaidMonth);
+            txtlastPaidYear=(TextView) dialogView.findViewById(R.id.lastPaidYear);
+            txtlastPaidAmount=(TextView) dialogView.findViewById(R.id.lastPaidAmount);
+            txtlastPaidby=(TextView) dialogView.findViewById(R.id.lastPaidby);
+
+            descSeperator =(LinearLayout)dialogView.findViewById(R.id.descSeperator);
+
+            txtfltdiscription.setVisibility(View.INVISIBLE);
+            txtlastPaidEntrydt.setVisibility(View.INVISIBLE);
+            txtlastPaidMonth.setVisibility(View.INVISIBLE);
+            txtlastPaidYear.setVisibility(View.INVISIBLE);
+            txtlastPaidAmount.setVisibility(View.INVISIBLE);
+            txtlastPaidby.setVisibility(View.INVISIBLE);
+            descSeperator.setVisibility(View.INVISIBLE);
+
             //--------------------------------------------------------------------------------------
 
             String chars = getResources().getString(R.string.PayMaintaincence);
@@ -364,10 +389,17 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
 
                 // Set Initial Value in Spinner
                 memberJSON Initialmemberpop = new memberJSON();
+
                 Initialmemberpop.setownername("");
                 Initialmemberpop.setrentername("");
                 Initialmemberpop.setflatnumber("");
-                Initialmemberpop.setFlag("");
+                Initialmemberpop.setflattype("");
+                Initialmemberpop.setlastPaidMonth("");
+                Initialmemberpop.setlastPaidYear("");
+                Initialmemberpop.setlastPaidAmount("");
+                Initialmemberpop.setlastPaidEntrydt("");
+                Initialmemberpop.setlastPaidby("");
+
                 member.add(Initialmemberpop);
                 Arraylst_Spinner_Member.add("Choose Flat....");
                 //
@@ -378,9 +410,16 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
                     memberJSON memberpop = new memberJSON();
 
                     memberpop.setownername(jsonobject.optString("Owner_name"));
-                    memberpop.setrentername(jsonobject.optString("Renter_name"));
+                    memberpop.setrentername(jsonobject.isNull("Renter_name") ? "" : jsonobject.getString("Renter_name")); // Renters might be null sometimes
                     memberpop.setflatnumber(jsonobject.optString("flt_no"));
-                    memberpop.setFlag(jsonobject.optString("flt_type"));
+                    memberpop.setflattype(jsonobject.optString("flt_type"));
+
+                    memberpop.setlastPaidMonth(jsonobject.isNull("LastPaidMonth") ? "" : jsonobject.optString("LastPaidMonth"));
+                    memberpop.setlastPaidYear(jsonobject.isNull("LastPaidYear") ? "" : jsonobject.optString("LastPaidYear"));
+                    memberpop.setlastPaidAmount(jsonobject.isNull("LastPaidAmount") ? "" : jsonobject.optString("LastPaidAmount"));
+                    memberpop.setlastPaidEntrydt(jsonobject.isNull("LastPaidEntrydt") ? "" : jsonobject.optString("LastPaidEntrydt"));
+                    memberpop.setlastPaidby(jsonobject.isNull("LastPaidby") ? "" : jsonobject.optString("LastPaidby"));
+
                     member.add(memberpop);
 
                     // Populate spinner with flats names
@@ -401,7 +440,6 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
             progressDialog.setMessage("Please wait...");
             progressDialog.setCancelable(true);
             progressDialog.show();
-
         }
 
         @Override
@@ -413,35 +451,74 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
                 // Spinner adapter
                 mySpinner.setAdapter(new ArrayAdapter<String>(maintainance.this , android.R.layout.simple_spinner_dropdown_item, Arraylst_Spinner_Member));
 
-                    isSpinnerInitial=true;
-                    mySpinner.setSelection(-1);
+                isSpinnerInitial=true;
+                mySpinner.setSelection(-1);
                 // Spinner on item click listener
                 mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> arg0,
-                                                   View arg1, int position, long arg3) {
-                            // TODO Auto-generated method stub
-                            // Locate the textviews in activity_main.xml
-                            if (isSpinnerInitial){
-                                isSpinnerInitial = false;
-                                return;
-                            }
-                            else {
-                                // Set the text followed by the position
-                                txtownername.setText("Owner  : "
-                                        + member.get(position).getownername());
-                                txtrentername.setText("Renter : "
-                                        + member.get(position).getrentername());
-                                txtflatnumber.setText("Flat : "
-                                        + member.get(position).getflatnumber());
-                            }
+                    @Override
+                    public void onItemSelected(AdapterView<?> arg0,
+                                               View arg1, int position, long arg3) {
+                        // TODO Auto-generated method stub
+                        // Locate the textviews in activity_main.xml
+                        if (isSpinnerInitial){
+                            isSpinnerInitial = false;
+                            return;
                         }
+                        else {
+                            // Set the text followed by the position
+                            //txtownername.setText("Owner  : "
+                            //        + member.get(position).getownername());
+                            //txtrentername.setText("Renter : "
+                            //        + member.get(position).getrentername());
+                            //txtflatnumber.setText("Flat : "
+                            //        + member.get(position).getflatnumber());
 
-                        @Override
-                        public void onNothingSelected(AdapterView<?> arg0) {
-                            // TODO Auto-generated method stub
+                            renterName = member.get(position).getrentername();
+                            if (!renterName.contains("Not Available"))
+                            {
+                                renterName = "Renter -  " + renterName;
+                            }
+                            else
+                            {
+                                renterName = "Self";
+                            }
+
+                            flatDescription = txtfltdiscription.getText().toString();
+                            String newString;
+                            newString ="Flat belongs to Owner " + member.get(position).getownername().toString() + " occupied by " + renterName+ ". " + "The Last Maintainance transactions was as follows:";
+
+                            //newString.replace("[[ownername]]",member.get(position).getownername().toString());
+                            //newString.replace("[[self_renter]]",renterName.toString());
+                            //flatDescription.replace("[[ownername]]",member.get(position).getownername().toString());
+                            //flatDescription.replace("[[self_renter]]",renterName.toString() );
+
+                            txtfltdiscription.setVisibility(View.VISIBLE);
+                            txtlastPaidEntrydt.setVisibility(View.VISIBLE);
+                            txtlastPaidMonth.setVisibility(View.VISIBLE);
+                            txtlastPaidYear.setVisibility(View.VISIBLE);
+                            txtlastPaidAmount.setVisibility(View.VISIBLE);
+                            txtlastPaidby.setVisibility(View.VISIBLE);
+                            descSeperator.setVisibility(View.VISIBLE);
+
+                            txtfltdiscription.setText(newString);
+                            txtlastPaidEntrydt.setText("Date : "
+                                    + member.get(position).getlastPaidEntrydt());
+                            txtlastPaidMonth.setText("Month : "
+                                    + member.get(position).getlastPaidMonth());
+                            txtlastPaidYear.setText("Year : "
+                                    + member.get(position).getlastPaidYear());
+                            txtlastPaidAmount.setText("Amount : "
+                                    + member.get(position).getlastPaidAmount());
+                            txtlastPaidby.setText("paid by : "
+                                    + member.get(position).getlastPaidby());
                         }
-                    });
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> arg0) {
+                        // TODO Auto-generated method stub
+                    }
+                });
                 }
                 progressDialog.cancel();
             } catch (Exception e) {

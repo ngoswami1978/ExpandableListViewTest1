@@ -15,12 +15,15 @@ import android.util.Log;
  */
 public class memberJSON {
     private String ownername ="";
-
     private String rentername="";
-
     private String flatnumber="";
+    private String flattype="";
 
-    private String flag="";
+    private String lastPaidEntrydt="";
+    private String lastPaidMonth="";
+    private String lastPaidYear="";
+    private String lastPaidAmount="";
+    private String lastPaidby="";
 
     public static JSONObject getJSONfromURL(String url1) {
         InputStream is = null;
@@ -71,7 +74,6 @@ public class memberJSON {
     {
         this.ownername = _ownername;
     }
-
     public String getownername()
     {
         return this.ownername;
@@ -81,7 +83,6 @@ public class memberJSON {
     {
         this.rentername = _rentername;
     }
-
     public String getrentername()
     {
         return this.rentername;
@@ -91,19 +92,44 @@ public class memberJSON {
     {
         this.flatnumber = _flatnumber;
     }
-
     public String getflatnumber()
     {
         return this.flatnumber;
     }
 
-    public void setFlag(String _Flag)
+    public void setflattype(String _flattype)
     {
-        this.flag = _Flag;
+        this.flattype = _flattype;
+    }
+    public String getflattype()
+    {
+        return this.flattype;
     }
 
-    public String getFlag()
+
+    public void setlastPaidMonth(String _lastPaidMonth)    {        this.lastPaidMonth = _lastPaidMonth;    }
+    public void setlastPaidYear(String _lastPaidYear)   { this.lastPaidYear = _lastPaidYear;  }
+    public void setlastPaidAmount(String _lastPaidAmount) { this.lastPaidAmount = _lastPaidAmount;}
+    public void setlastPaidEntrydt(String _lastPaidEntrydt)   {      this.lastPaidEntrydt= _lastPaidEntrydt;    }
+    public void setlastPaidby(String _lastPaidby)
     {
-        return this.flag;
+        this.lastPaidby = _lastPaidby;
     }
+
+    public String getlastPaidMonth()
+    {
+        return this.lastPaidMonth;
+    }
+    public String getlastPaidYear()
+    {
+        return this.lastPaidYear;
+    }
+    public String getlastPaidAmount()
+    {
+        return this.lastPaidAmount;
+    }
+    public String getlastPaidEntrydt()    {        return this.lastPaidEntrydt;    }
+    public String getlastPaidby()    {        return this.lastPaidby;    }
+
+
 }
