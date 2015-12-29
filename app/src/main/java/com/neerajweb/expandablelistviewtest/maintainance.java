@@ -1,6 +1,7 @@
 package com.neerajweb.expandablelistviewtest;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -17,11 +18,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -56,7 +59,9 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
     ArrayList<memberJSON> member;
     public static final int DIALOG_DOWNLOAD_PROGRESS = 0;
 
+    EditText edtAmount;
     Spinner mySpinner;
+    Spinner my_paymodespinner;
     TextView txtownername;
     TextView txtrentername;
     TextView txtflatnumber;
@@ -80,6 +85,7 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    boolean blnIsValidation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -207,6 +213,7 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
 
     public void showMaintainanceEntryDialog(int intMonth, int intYear) {
 
+
         try {
 
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
@@ -253,10 +260,12 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
                     break;
             }
 
-            final EditText edtAmount = (EditText) dialogView.findViewById(R.id.editAmt);
+            edtAmount = (EditText) dialogView.findViewById(R.id.editAmt);
 
             // Locate the spinner and other controls in maintainance_entry_dialog.xml
             mySpinner = (Spinner) dialogView.findViewById(R.id.my_spinner);
+            my_paymodespinner = (Spinner) dialogView.findViewById(R.id.my_paymodespinner);
+
             txtownername = (TextView) dialogView.findViewById(R.id.ownername);
             txtrentername = (TextView) dialogView.findViewById(R.id.rentername);
             txtflatnumber = (TextView) dialogView.findViewById(R.id.flatnumber);
@@ -290,6 +299,8 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
             dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
                     //do something with edtAmount.getText().toString();
+                    //All of the fun happens inside the CustomListener now.
+                    //I had to move it to enable data validation.
                 }
             });
             dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -300,6 +311,9 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
 
             AlertDialog b = dialogBuilder.create();
             b.show();
+            Button theButton = b.getButton(DialogInterface.BUTTON_POSITIVE);
+            theButton.setOnClickListener(new CustomListener(b));
+
             // Download JSON file AsyncTask
             new DownloadJSON().execute();
         } catch (Exception e) {
@@ -307,6 +321,58 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
         }
     }
 
+    class CustomListener implements View.OnClickListener {
+        private final Dialog dialog;
+        public CustomListener(Dialog dialog) {
+            this.dialog = dialog;
+        }
+        @Override
+        public void onClick(View v) {
+            // put your code here
+            blnIsValidation = validateInputs();
+
+            if (!blnIsValidation) {
+                //edtAmount.setError("Please enter maintainance amount!"); //
+                //Toast.makeText(maintainance.this, "Invalid data", Toast.LENGTH_SHORT).show();
+            } else {
+                dialog.dismiss();
+            }
+        }
+    }
+
+    public boolean validateInputs()
+    {
+        boolean isValidate=true;
+        if( edtAmount.getText().toString().length() == 0 ) {
+            edtAmount.setError("Please provide Maintainance Amount!");
+            isValidate=false;
+            return isValidate;
+        }
+
+        String st =mySpinner.getSelectedItem().toString();
+        int pos =mySpinner.getSelectedItemPosition();
+
+        //Toast.makeText(this,
+        //        "Selected position !!" + pos , Toast.LENGTH_LONG)
+        //        .show();
+
+        if(pos!=0)
+        {
+            String flat_type = mySpinner.getSelectedItem().toString();
+            Toast.makeText(this,
+                    "Selected flat !!" + flat_type  , Toast.LENGTH_LONG)
+                    .show();
+            isValidate=true;
+            return isValidate;
+        }
+        else{
+            Toast.makeText(this,
+                    "Please Select the flat !!", Toast.LENGTH_LONG)
+                    .show();
+            isValidate=false;
+            return isValidate;
+        }
+    }
     /**
      * @param monthNumber Month Number starts with 0. For January it is 0 and for December it is 11.
      * @return
@@ -447,8 +513,14 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
             try
             {
                 //progressDialog.dismiss();
+
                 if (!(Arraylst_Spinner_Member.isEmpty())) {
-                // Spinner adapter
+
+                //Setting Payment Mode spinner adapter
+                ArrayAdapter<String> spinnerpaymodeArrayAdapter = new ArrayAdapter<String>(maintainance.this, android.R.layout.simple_spinner_dropdown_item, getResources().getStringArray(R.array.paymentmode));
+                my_paymodespinner.setAdapter(spinnerpaymodeArrayAdapter);
+
+                // Setting Flat Spinner adapter
                 mySpinner.setAdapter(new ArrayAdapter<String>(maintainance.this , android.R.layout.simple_spinner_dropdown_item, Arraylst_Spinner_Member));
 
                 isSpinnerInitial=true;
@@ -473,19 +545,20 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
                             //txtflatnumber.setText("Flat : "
                             //        + member.get(position).getflatnumber());
 
+                            flatDescription = txtfltdiscription.getText().toString();
+                            String newString;
+
                             renterName = member.get(position).getrentername();
                             if (!renterName.contains("Not Available"))
                             {
                                 renterName = "Renter -  " + renterName;
+                                newString ="Flat belongs to Owner " + member.get(position).getownername().toString() + " occupied by " + renterName+ ". " + "The Last Maintainance transactions was as follows:";
                             }
                             else
                             {
-                                renterName = "Self";
+                                //renterName = "Self";
+                                newString ="Flat belongs to Owner " + member.get(position).getownername().toString() + ". " + "The Last Maintainance transactions was as follows:";
                             }
-
-                            flatDescription = txtfltdiscription.getText().toString();
-                            String newString;
-                            newString ="Flat belongs to Owner " + member.get(position).getownername().toString() + " occupied by " + renterName+ ". " + "The Last Maintainance transactions was as follows:";
 
                             //newString.replace("[[ownername]]",member.get(position).getownername().toString());
                             //newString.replace("[[self_renter]]",renterName.toString());

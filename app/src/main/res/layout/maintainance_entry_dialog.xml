@@ -15,17 +15,38 @@
         android:inputType="number"/>
 
     <TextView
+        android:id="@+id/txtmy_flat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/red"
         android:textSize="10dp"
         android:paddingTop="10sp"
         android:paddingLeft="8sp"
+        android:background="@drawable/triangle_from"
         android:text="Select Flat"/>
 
     <Spinner
         android:id="@+id/my_spinner"
         android:layout_width="match_parent"
+        android:layout_below="@+id/txtmy_flat"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/txtmy_paymode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:textSize="10dp"
+        android:paddingTop="10sp"
+        android:paddingLeft="8sp"
+        android:layout_below="@+id/my_spinner"
+        android:background="@drawable/triangle_from"
+        android:text="Select Payment mode"/>
+
+    <Spinner
+        android:id="@+id/my_paymodespinner"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/txtmy_paymode"
         android:layout_height="wrap_content" />
 
     <TextView
@@ -34,7 +55,8 @@
         android:layout_height="wrap_content"
         android:paddingLeft="6sp"
         android:textColor="@color/timestamp"
-        android:layout_below="@+id/my_spinner"
+        android:visibility="gone"
+        android:layout_below="@+id/my_paymodespinner"
         android:textStyle="italic" />
 
     <TextView
@@ -44,7 +66,7 @@
         android:paddingLeft="6sp"
         android:textColor="@color/timestamp"
         android:layout_below="@+id/ownername"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:textStyle="italic" />
 
     <TextView
@@ -53,7 +75,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="6sp"
         android:textColor="@color/timestamp"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:layout_below="@+id/rentername"
         android:textStyle="italic" />
 
@@ -119,7 +141,14 @@
         android:paddingLeft="6sp"
         android:text="paid by : "
         android:textColor="@color/timestamp"
+        android:paddingBottom="10sp"
         android:layout_below="@+id/lastPaidAmount"
         android:textStyle="italic" />
+    <LinearLayout
+        android:id="@+id/descSeperatordown"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:background="@color/timestamp"
+        android:layout_height="1sp"></LinearLayout>
 
 </LinearLayout>

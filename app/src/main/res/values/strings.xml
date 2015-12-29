@@ -18,6 +18,12 @@
 
     <string name="PayMaintaincence">Maintainance</string>
 
+    <string-array name="paymentmode">
+        <item>Cash</item>
+        <item>Cheque</item>
+        <item>Netbanking</item>
+    </string-array>
+
     <string-array name="title_array">
         <item>Maintainance?</item>
         <item>Laundry Facilities?</item>
