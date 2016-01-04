@@ -28,7 +28,7 @@ public class date_time_picker_MainActivity extends ActionBarActivity implements 
                 getSupportFragmentManager()
         );
         // Show It baby!
-        simpleDateTimePicker.show();
+        simpleDateTimePicker.show(false,"");
 
         // Or we can chain it to simplify
         SimpleDateTimePicker.make(
@@ -36,7 +36,7 @@ public class date_time_picker_MainActivity extends ActionBarActivity implements 
                 new Date(),
                 this,
                 getSupportFragmentManager()
-        ).show();
+        ).show(false,"");
     }
 
     @Override

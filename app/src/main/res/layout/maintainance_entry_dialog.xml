@@ -26,7 +26,7 @@
         android:text="Select Flat"/>
 
     <Spinner
-        android:id="@+id/my_spinner"
+        android:id="@+id/my_flatspinner"
         android:layout_width="match_parent"
         android:layout_below="@+id/txtmy_flat"
         android:layout_height="wrap_content" />
@@ -84,27 +84,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="6sp"
-        android:paddingBottom="10sp"
+        android:background="@drawable/textviewleftborder"
         android:textColor="@color/timestamp"
         android:layout_below="@+id/flatnumber"
         android:text="@string/FlatdescriptionwithLastTransaction"
         android:textStyle="italic" />
 
     <LinearLayout
-        android:id="@+id/descSeperator"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:background="@color/timestamp"
-        android:layout_height="1sp"></LinearLayout>
-
+        android:id="@+id/bubblecontentWithBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:background="@drawable/in_message_bg"
+        android:paddingLeft="10dp"
+        android:paddingBottom="5dp"
+        android:orientation="vertical">
     <TextView
         android:id="@+id/lastPaidEntrydt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="6sp"
-        android:paddingTop="6sp"
         android:text="Date : "
-        android:textColor="@color/timestamp"
+        android:textSize="10sp"
+        android:textColor="@color/red"
         android:layout_below="@+id/fltdiscription"
         android:textStyle="italic" />
     <TextView
@@ -112,7 +114,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="6sp"
-        android:textColor="@color/timestamp"
+        android:textColor="@color/red"
+        android:textSize="10sp"
         android:layout_below="@+id/lastPaidEntrydt"
         android:text="Month : "
         android:textStyle="italic" />
@@ -121,34 +124,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="6sp"
-        android:textColor="@color/timestamp"
+        android:textColor="@color/red"
+        android:textSize="10sp"
         android:text="Year :"
         android:layout_below="@+id/lastPaidMonth"
         android:textStyle="italic" />
-    <TextView
-        android:id="@+id/lastPaidAmount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="6sp"
-        android:text="Amount : "
-        android:textColor="@color/timestamp"
-        android:layout_below="@+id/lastPaidYear"
-        android:textStyle="italic" />
-    <TextView
-        android:id="@+id/lastPaidby"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="6sp"
-        android:text="paid by : "
-        android:textColor="@color/timestamp"
-        android:paddingBottom="10sp"
-        android:layout_below="@+id/lastPaidAmount"
-        android:textStyle="italic" />
+    </LinearLayout>
     <LinearLayout
-        android:id="@+id/descSeperatordown"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:background="@color/timestamp"
-        android:layout_height="1sp"></LinearLayout>
-
+        android:id="@+id/bubblecontentWithBackgroundcash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="@drawable/out_message_bg"
+        android:paddingLeft="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/lastPaidAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="6sp"
+            android:textSize="10sp"
+            android:text="Amount : "
+            android:textColor="@color/red"
+            android:layout_below="@+id/lastPaidYear"
+            android:textStyle="italic" />
+        <TextView
+            android:id="@+id/lastPaidby"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="6sp"
+            android:textSize="10sp"
+            android:text="paid by : "
+            android:textColor="@color/red"
+            android:layout_below="@+id/lastPaidAmount"
+            android:textStyle="italic" />
+    </LinearLayout>
 </LinearLayout>

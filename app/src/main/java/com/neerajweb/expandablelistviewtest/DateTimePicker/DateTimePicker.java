@@ -2,6 +2,7 @@ package com.neerajweb.expandablelistviewtest.DateTimePicker;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,7 +16,9 @@ import android.widget.TimePicker;
 
 import com.neerajweb.expandablelistviewtest.R;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by Admin on 04/12/2015.
@@ -33,6 +36,8 @@ public class DateTimePicker extends DialogFragment {
     private Bundle mArgument;
     private DatePicker mDatePicker;
     private TimePicker mTimePicker;
+    public boolean isShowCurrentDate;
+    public int monthCode;
     // DialogFragment constructor must be empty
     public DateTimePicker() {
     }
@@ -101,11 +106,31 @@ public class DateTimePicker extends DialogFragment {
         mTabHost.addTab(mTimeTab);
         // Retrieve Date from Arguments sent to the Dialog
         DateTime mDateTime = new DateTime((Date) mArgument.getSerializable(KEY_INIT_DATE));
+
         // Initialize Date and Time Pickers
         mDatePicker = (DatePicker) mView.findViewById(R.id.date_picker);
         mTimePicker = (TimePicker) mView.findViewById(R.id.time_picker);
         mDatePicker.init(mDateTime.getYear(), mDateTime.getMonthOfYear(),
                 mDateTime.getDayOfMonth(), null);
+
+        if (isShowCurrentDate)
+        {
+            int day  = mDateTime.getDayOfMonth();
+            int year = mDateTime.getYear();
+            int month_code = monthCode;
+            mDatePicker.updateDate(year, month_code, day);
+
+            final Calendar c = Calendar.getInstance();
+            c.setTimeZone(TimeZone.getDefault());
+            c.set(year, month_code, day);
+
+            long OFFSET = 1000 ; //milli seconds offset for your date.
+            mDatePicker.setMaxDate(c.getTimeInMillis() + 1 * OFFSET);
+
+            c.add(Calendar.DAY_OF_MONTH, -4);
+            mDatePicker.setMinDate(c.getTimeInMillis() - 1 * OFFSET);
+        }
+
         mTimePicker.setCurrentHour(mDateTime.getHourOfDay());
         mTimePicker.setCurrentMinute(mDateTime.getMinuteOfHour());
         // Return created view

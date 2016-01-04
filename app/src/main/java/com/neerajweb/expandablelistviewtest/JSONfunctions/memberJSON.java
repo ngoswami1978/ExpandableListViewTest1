@@ -14,6 +14,10 @@ import android.util.Log;
  * Created by Admin on 10/12/2015.
  */
 public class memberJSON {
+
+    private int flt_id;
+    private int Owner_id;
+
     private String ownername ="";
     private String rentername="";
     private String flatnumber="";
@@ -68,6 +72,19 @@ public class memberJSON {
         }
 
         return jArray;
+    }
+
+
+    public void setownerid(int _ownerid)    {        this.Owner_id = _ownerid;    }
+    public int getownerid()    {        return this.Owner_id;    }
+
+    public void setfltid(int _flt_id)
+    {
+        this.flt_id = _flt_id;
+    }
+    public int getfltid()
+    {
+        return this.flt_id;
     }
 
     public void setownername(String _ownername)

@@ -26,6 +26,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -33,14 +37,17 @@ import com.neerajweb.expandablelistviewtest.DateTimePicker.DateTime;
 import com.neerajweb.expandablelistviewtest.DateTimePicker.DateTimePicker;
 import com.neerajweb.expandablelistviewtest.DateTimePicker.SimpleDateTimePicker;
 import com.neerajweb.expandablelistviewtest.JSONfunctions.memberJSON;
+import com.neerajweb.expandablelistviewtest.Maintainance.GlobalClassMyApplication;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -49,7 +56,6 @@ import java.util.Date;
 
 public class maintainance extends ActionBarActivity implements DateTimePicker.OnDateTimeSetListener {
 
-    ImageView imageView1;
     TextView textview;
 
     JSONObject jsonobject;
@@ -74,100 +80,323 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
     TextView txtlastPaidby;
     LinearLayout descSeperator;
 
+    LinearLayout bubblecontentWithBackgrounddate;
+    LinearLayout bubblecontentWithBackgroundcash;
+
     String Error = null;
     String flatDescription;
     String renterName;
     boolean isSpinnerInitial ;
     View dialogView=null;
+    boolean blnIsValidation;
+
+    //Maintainance update progress dialog
+    ProgressDialog MPD;
+
+    // create hash map
+    HashMap<String, String> hashmapmaintaincneInput = new HashMap<String, String>();
+
+    Date mCurrentDate;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-    boolean blnIsValidation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.maintainance);
 
-        imageView1 = (ImageView) findViewById(R.id.imageView1);
-        ImageView imageView2 = (ImageView) findViewById(R.id.imageView2);
-        ImageView imageView3 = (ImageView) findViewById(R.id.imageView3);
-        ImageView imageView4 = (ImageView) findViewById(R.id.imageView4);
-        ImageView imageView5 = (ImageView) findViewById(R.id.imageView5);
-        ImageView imageView6 = (ImageView) findViewById(R.id.imageView6);
-        ImageView imageView7 = (ImageView) findViewById(R.id.imageView7);
-        ImageView imagePay = (ImageView) findViewById(R.id.imagePay);
+        MPD = new ProgressDialog(this);
+        MPD.setMessage("Updating please wait.....");
+        MPD.setCancelable(false);
+
+        mCurrentDate = new Date();
+        int intCurrentMonth =mCurrentDate.getMonth();
+
+        ImageView paymentcard = (ImageView) findViewById(R.id.imagePay);
+
+        ImageView imageViewJAN = (ImageView) findViewById(R.id.imageViewJAN);
+        imageViewJAN.setImageDrawable(getResources().getDrawable(R.drawable.jangray));
+        enableDisableMonth(imageViewJAN ,intCurrentMonth,0 );
+
+        ImageView imageViewFEB = (ImageView) findViewById(R.id.imageViewFEB);
+        imageViewFEB.setImageDrawable(getResources().getDrawable(R.drawable.febgray));
+        enableDisableMonth(imageViewFEB, intCurrentMonth, 1);
+
+        ImageView imageViewMAR = (ImageView) findViewById(R.id.imageViewMAR);
+        imageViewMAR.setImageDrawable(getResources().getDrawable(R.drawable.margray));
+        enableDisableMonth(imageViewMAR, intCurrentMonth, 2);
+
+        ImageView imageViewAPR = (ImageView) findViewById(R.id.imageViewAPR);
+        imageViewAPR.setImageDrawable(getResources().getDrawable(R.drawable.aprgray));
+        enableDisableMonth(imageViewAPR, intCurrentMonth, 3);
+
+        ImageView imageViewMAY = (ImageView) findViewById(R.id.imageViewMAY);
+        imageViewMAY.setImageDrawable(getResources().getDrawable(R.drawable.maygray));
+        enableDisableMonth(imageViewMAY, intCurrentMonth, 4);
+
+        ImageView imageViewJUN = (ImageView) findViewById(R.id.imageViewJUN);
+        imageViewJUN.setImageDrawable(getResources().getDrawable(R.drawable.jungray));
+        enableDisableMonth(imageViewJUN, intCurrentMonth, 5);
+
+        ImageView imageViewJUL = (ImageView) findViewById(R.id.imageViewJUL);
+        imageViewJUL.setImageDrawable(getResources().getDrawable(R.drawable.julgray));
+        enableDisableMonth(imageViewJUL, intCurrentMonth, 6);
+
+        ImageView imageViewAUG = (ImageView) findViewById(R.id.imageViewAUG);
+        imageViewAUG.setImageDrawable(getResources().getDrawable(R.drawable.auggray));
+        enableDisableMonth(imageViewAUG, intCurrentMonth, 7);
+
+        ImageView imageViewSEP = (ImageView) findViewById(R.id.imageViewSEP);
+        imageViewSEP.setImageDrawable(getResources().getDrawable(R.drawable.sepgray));
+        enableDisableMonth(imageViewSEP, intCurrentMonth, 8);
+
+        ImageView imageViewOCT = (ImageView) findViewById(R.id.imageViewOCT);
+        imageViewOCT.setImageDrawable(getResources().getDrawable(R.drawable.octgray));
+        enableDisableMonth(imageViewOCT, intCurrentMonth, 9);
+
+        ImageView imageViewNOV = (ImageView) findViewById(R.id.imageViewNOV);
+        imageViewNOV.setImageDrawable(getResources().getDrawable(R.drawable.novgray));
+        enableDisableMonth(imageViewNOV, intCurrentMonth, 10);
+
+        ImageView imageViewDEC = (ImageView) findViewById(R.id.imageViewDEC);
+        imageViewDEC.setImageDrawable(getResources().getDrawable(R.drawable.decgray));
+        enableDisableMonth(imageViewDEC, intCurrentMonth, 11);
+
 
         TextView textview1 = (TextView) findViewById(R.id.tvDispMaint1);
-
         textview1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                funpayMaintainance();
+                funpayMaintainance(false, "");
             }
         });
 
-
-        imageView2.setOnClickListener(new OnClickListener() {
+        paymentcard.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                paymentcard();
             }
         });
 
-        imageView3.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
-        imageView4.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
-        imageView5.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        imageView2.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                funImage2Click();
-            }
-        });
-        imageView6.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        imageView7.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                funImage7Click();
-            }
-        });
-        imagePay.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                funpayMaintainance();
-            }
-        });
+//        imageViewMAR.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                funpayMaintainance(true,"MAR");
+//            }
+//        });
+//        imageViewAPR.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                funpayMaintainance(true,"APR");
+//            }
+//        });
+//        imageViewMAY.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                funpayMaintainance(true,"MAY");
+//            }
+//        });
+//        imageViewJUN.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                funpayMaintainance(true,"JUN");
+//            }
+//        });
+//        imageViewJUL.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                funpayMaintainance(true,"JUL");
+//            }
+//        });
+//        imageViewAUG.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                funpayMaintainance(true,"AUG");
+//            }
+//        });
+//        imageViewSEP.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                funpayMaintainance(true,"SEP");
+//            }
+//        });
+//        imageViewOCT.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                funpayMaintainance(true,"OCT");
+//            }
+//        });
+//        imageViewNOV.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                funpayMaintainance(true,"NOV");
+//            }
+//        });
+//        imageViewDEC.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                funpayMaintainance(true,"DEC");
+//            }
+//        });
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    private void funImage2Click() {
+    private void enableDisableMonth(ImageView imgView, Integer intMth,int mthCode)
+    {
+        try
+        {
+            switch (mthCode) {
+                case 0:
+                    if (intMth== mthCode) {
+                        imgView.setImageDrawable(getResources().getDrawable(R.drawable.jan));
+                        imgView.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                funpayMaintainance(true, "JAN");
+                            }
+                        });
+                    }
+                    break;
+                case 1:
+                    if (intMth== mthCode){
+                    imgView.setImageDrawable(getResources().getDrawable(R.drawable.feb));
+                    imgView.setOnClickListener(new OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            funpayMaintainance(true,"FEB");
+                        }
+                    });
+                    }
+                    break;
+                case 2:
+                    if (intMth== mthCode) {
+                        imgView.setImageDrawable(getResources().getDrawable(R.drawable.mar));
+                        imgView.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                funpayMaintainance(true, "MAR");
+                            }
+                        });
+                    }
+                    break;
+                case 3:
+                    if (intMth== mthCode) {
+                        imgView.setImageDrawable(getResources().getDrawable(R.drawable.apr));
+                        imgView.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                funpayMaintainance(true, "APR");
+                            }
+                        });
+                    }
+                    break;
+                case 4:
+                    if (intMth== mthCode) {
+                        imgView.setImageDrawable(getResources().getDrawable(R.drawable.may));
+                        imgView.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                funpayMaintainance(true, "MAY");
+                            }
+                        });
+                    }
+                    break;
+                case 5:
+                    if (intMth== mthCode) {
+                        imgView.setImageDrawable(getResources().getDrawable(R.drawable.jun));
+                        imgView.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                funpayMaintainance(true, "JUN");
+                            }
+                        });
+                        break;
+                    }
+                case 6:
+                    if (intMth== mthCode) {
+                        imgView.setImageDrawable(getResources().getDrawable(R.drawable.jul));
+                        imgView.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                funpayMaintainance(true, "JUL");
+                            }
+                        });
+                    }
+                    break;
+                case 7:
+                    if (intMth== mthCode) {
+                        imgView.setImageDrawable(getResources().getDrawable(R.drawable.aug));
+                        imgView.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                funpayMaintainance(true, "AUG");
+                            }
+                        });
+                    }
+                    break;
+                case 8:
+                    if (intMth== mthCode) {
+                        imgView.setImageDrawable(getResources().getDrawable(R.drawable.sep));
+                        imgView.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                funpayMaintainance(true, "SEP");
+                            }
+                        });
+                    }
+                    break;
+                case 9:
+                    if (intMth== mthCode) {
+                        imgView.setImageDrawable(getResources().getDrawable(R.drawable.oct));
+                        imgView.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                funpayMaintainance(true, "OCT");
+                            }
+                        });
+                    }
+                    break;
+                case 10:
+                    if (intMth== mthCode) {
+                        imgView.setImageDrawable(getResources().getDrawable(R.drawable.nov));
+                        imgView.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                funpayMaintainance(true, "NOV");
+                            }
+                        });
+                    }
+                    break;
+                case 11:
+                    if (intMth== mthCode) {
+                        imgView.setImageDrawable(getResources().getDrawable(R.drawable.dec));
+                        imgView.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                funpayMaintainance(true, "DEC");
+                            }
+                        });
+                    }
+                    break;
+            }
+        }
+        catch(Exception Ex)
+        {
+
+        }
+    }
+
+    private void paymentcard() {
         // Create a SimpleDateTimePicker and Show it
         SimpleDateTimePicker simpleDateTimePicker = SimpleDateTimePicker.make(
                 "Select  Date & Time",
@@ -176,30 +405,31 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
                 getSupportFragmentManager()
         );
         // Show It
-        simpleDateTimePicker.show();
+        simpleDateTimePicker.show(false,"");
     }
 
-    private void funImage7Click() {
-        // Create a SimpleDateTimePicker and Show it
-        SimpleDateTimePicker simpleDateTimePicker = SimpleDateTimePicker.make(
-                "Select  Date & Time",
-                new Date(),
-                this,
-                getSupportFragmentManager()
-        );
-        // Show It
-        simpleDateTimePicker.show();
-    }
-
-    private void funpayMaintainance() {
+    private void funpayMaintainance(boolean isCurentDateRequiredOnly,String mnth) {
         // Or we can chain it to simplify
-        SimpleDateTimePicker.make(
-                "Select  Date & Time",
-                new Date(),
-                this,
-                getSupportFragmentManager()
-        ).show();
+        if (mnth!="")
+        {
+            SimpleDateTimePicker.make(
+                    "Select  Date & Time",
+                    new Date(),
+                    this,
+                    getSupportFragmentManager()
+            ).show(isCurentDateRequiredOnly,mnth);
+        }
+        else {
+            SimpleDateTimePicker.make(
+                    "Select  Date & Time",
+                    new Date(),
+                    this,
+                    getSupportFragmentManager()
+            ).show(isCurentDateRequiredOnly,"");
+        }
     }
+
+
 
     @Override
     public void DateTimeSet(Date date) {
@@ -213,9 +443,7 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
 
     public void showMaintainanceEntryDialog(int intMonth, int intYear) {
 
-
         try {
-
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
             LayoutInflater inflater = this.getLayoutInflater();
             dialogView = inflater.inflate(R.layout.maintainance_entry_dialog, null);
@@ -263,7 +491,7 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
             edtAmount = (EditText) dialogView.findViewById(R.id.editAmt);
 
             // Locate the spinner and other controls in maintainance_entry_dialog.xml
-            mySpinner = (Spinner) dialogView.findViewById(R.id.my_spinner);
+            mySpinner = (Spinner) dialogView.findViewById(R.id.my_flatspinner);
             my_paymodespinner = (Spinner) dialogView.findViewById(R.id.my_paymodespinner);
 
             txtownername = (TextView) dialogView.findViewById(R.id.ownername);
@@ -277,7 +505,10 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
             txtlastPaidAmount=(TextView) dialogView.findViewById(R.id.lastPaidAmount);
             txtlastPaidby=(TextView) dialogView.findViewById(R.id.lastPaidby);
 
-            descSeperator =(LinearLayout)dialogView.findViewById(R.id.descSeperator);
+//              descSeperator =(LinearLayout)dialogView.findViewById(R.id.descSeperator);
+
+            bubblecontentWithBackgrounddate=(LinearLayout)dialogView.findViewById(R.id.bubblecontentWithBackground);
+            bubblecontentWithBackgroundcash=(LinearLayout)dialogView.findViewById(R.id.bubblecontentWithBackgroundcash);
 
             txtfltdiscription.setVisibility(View.INVISIBLE);
             txtlastPaidEntrydt.setVisibility(View.INVISIBLE);
@@ -285,21 +516,24 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
             txtlastPaidYear.setVisibility(View.INVISIBLE);
             txtlastPaidAmount.setVisibility(View.INVISIBLE);
             txtlastPaidby.setVisibility(View.INVISIBLE);
-            descSeperator.setVisibility(View.INVISIBLE);
+//              descSeperator.setVisibility(View.INVISIBLE);
+            bubblecontentWithBackgrounddate.setVisibility(View.INVISIBLE);
+            bubblecontentWithBackgroundcash.setVisibility(View.INVISIBLE);
 
             //--------------------------------------------------------------------------------------
-
             String chars = getResources().getString(R.string.PayMaintaincence);
             SpannableString str = new SpannableString(chars);
             str.setSpan(new ForegroundColorSpan(Color.WHITE), 0, chars.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
             dialogBuilder.setTitle(String.valueOf(intYear) + " " + str); //getMonthShortName(intMonth)
+
+//          final GlobalClass globalVariable = (GlobalClass) getApplicationContext();
+//          globalVariable.getMonthShortName(intMonth);
 
             dialogBuilder.setMessage("Fill Maintenance Amount");
             dialogBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
                     //do something with edtAmount.getText().toString();
-                    //All of the fun happens inside the CustomListener now.
+                    //All of the validation happens inside the CustomListener.
                     //I had to move it to enable data validation.
                 }
             });
@@ -314,13 +548,14 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
             Button theButton = b.getButton(DialogInterface.BUTTON_POSITIVE);
             theButton.setOnClickListener(new CustomListener(b));
 
-            // Download JSON file AsyncTask
+            // Download JSON data AsyncTask
             new DownloadJSON().execute();
         } catch (Exception e) {
             Error = e.getMessage();
         }
     }
 
+//  CustomListener class used for validations
     class CustomListener implements View.OnClickListener {
         private final Dialog dialog;
         public CustomListener(Dialog dialog) {
@@ -335,7 +570,9 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
                 //edtAmount.setError("Please enter maintainance amount!"); //
                 //Toast.makeText(maintainance.this, "Invalid data", Toast.LENGTH_SHORT).show();
             } else {
-                dialog.dismiss();
+//              call maintainance deposit Web servicce here to insert deposit amount into server
+                insert(dialogView);
+                //dialog.dismiss();
             }
         }
     }
@@ -360,7 +597,7 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
         {
             String flat_type = mySpinner.getSelectedItem().toString();
             Toast.makeText(this,
-                    "Selected flat !!" + flat_type  , Toast.LENGTH_LONG)
+                    "Thankyou for the maintainance payment of selected flat !!" + flat_type  , Toast.LENGTH_LONG)
                     .show();
             isValidate=true;
             return isValidate;
@@ -372,27 +609,6 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
             isValidate=false;
             return isValidate;
         }
-    }
-    /**
-     * @param monthNumber Month Number starts with 0. For January it is 0 and for December it is 11.
-     * @return
-     */
-    public static String getMonthShortName(int monthNumber) {
-        String monthName = "";
-
-        if (monthNumber >= 0 && monthNumber < 12)
-            try {
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.MONTH, monthNumber);
-
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM");
-                simpleDateFormat.setCalendar(calendar);
-                monthName = simpleDateFormat.format(calendar.getTime());
-            } catch (Exception e) {
-                if (e != null)
-                    e.printStackTrace();
-            }
-        return monthName.toUpperCase();
     }
 
     @Override
@@ -435,27 +651,44 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
         client.disconnect();
     }
 
-    // Download JSON file AsyncTask
+    // Download JSON data AsyncTask
     private class DownloadJSON extends AsyncTask<Void, Void, Void> {
         ProgressDialog progressDialog;
+        final GlobalClassMyApplication globalVariable = (GlobalClassMyApplication) getApplicationContext();
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(maintainance.this);
+            progressDialog.setTitle("Processing...");
+            progressDialog.setMessage("Please wait...");
+            progressDialog.setCancelable(true);
+            progressDialog.show();
+        }
+
         @Override
         protected Void doInBackground(Void... params) {
-            // Locate the memberJSON Class
+//          Locate the memberJSON Class
             member = new ArrayList<memberJSON>();
-            // Create an array to populate the spinner
+//          Create an array to populate the spinner
             Arraylst_Spinner_Member = new ArrayList<String>();
 
-            // JSON file URL address
-            jsonobject = memberJSON
-                    .getJSONfromURL("http://myandroidng.com/member_detail.php");
-
             try {
-                // Locate the NodeList name
+//                  JSON file URL address
+//                  jsonobject = memberJSON
+//                        .getJSONfromURL("http://myandroidng.com/member_detail.php");
+
+                jsonobject = memberJSON
+                        .getJSONfromURL(globalVariable.URL_MEMBERDETAIL);
+
+//              Locate the NodeList name
                 jsonarray = jsonobject.getJSONArray("register_member");
 
-                // Set Initial Value in Spinner
+//              Set Initial Value in Spinner
                 memberJSON Initialmemberpop = new memberJSON();
 
+                Initialmemberpop.setownerid(0);
+                Initialmemberpop.setfltid(0);
                 Initialmemberpop.setownername("");
                 Initialmemberpop.setrentername("");
                 Initialmemberpop.setflatnumber("");
@@ -468,17 +701,20 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
 
                 member.add(Initialmemberpop);
                 Arraylst_Spinner_Member.add("Choose Flat....");
-                //
+
 
                 for (int i = 0; i < jsonarray.length(); i++) {
                     jsonobject = jsonarray.getJSONObject(i);
 
                     memberJSON memberpop = new memberJSON();
 
+                    memberpop.setownerid(jsonobject.optInt("Owner_id"));
+                    memberpop.setfltid(jsonobject.optInt("flt_id"));
                     memberpop.setownername(jsonobject.optString("Owner_name"));
                     memberpop.setrentername(jsonobject.isNull("Renter_name") ? "" : jsonobject.getString("Renter_name")); // Renters might be null sometimes
                     memberpop.setflatnumber(jsonobject.optString("flt_no"));
                     memberpop.setflattype(jsonobject.optString("flt_type"));
+
 
                     memberpop.setlastPaidMonth(jsonobject.isNull("LastPaidMonth") ? "" : jsonobject.optString("LastPaidMonth"));
                     memberpop.setlastPaidYear(jsonobject.isNull("LastPaidYear") ? "" : jsonobject.optString("LastPaidYear"));
@@ -496,16 +732,6 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
                 e.printStackTrace();
             }
             return null;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progressDialog = new ProgressDialog(maintainance.this);
-            progressDialog.setTitle("Processing...");
-            progressDialog.setMessage("Please wait...");
-            progressDialog.setCancelable(true);
-            progressDialog.show();
         }
 
         @Override
@@ -538,44 +764,72 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
                         }
                         else {
                             // Set the text followed by the position
-                            //txtownername.setText("Owner  : "
-                            //        + member.get(position).getownername());
-                            //txtrentername.setText("Renter : "
-                            //        + member.get(position).getrentername());
-                            //txtflatnumber.setText("Flat : "
-                            //        + member.get(position).getflatnumber());
+
+                            // clear hash map
+                            hashmapmaintaincneInput.clear();
+
+                            hashmapmaintaincneInput.put("FLT_ID", String.valueOf(member.get(position).getfltid()));
+                            hashmapmaintaincneInput.put("OWNER_ID", String.valueOf(member.get(position).getownerid()) );
+                            hashmapmaintaincneInput.put("OWNERNAME", member.get(position).getownername().toString());
+                            hashmapmaintaincneInput.put("RENTERNAME", member.get(position).getrentername().toString());
+                            hashmapmaintaincneInput.put("FLATNUMBER", member.get(position).getflatnumber().toString());
+                            hashmapmaintaincneInput.put("FLATTYPE", member.get(position).getflattype().toString());
 
                             flatDescription = txtfltdiscription.getText().toString();
                             String newString;
 
                             renterName = member.get(position).getrentername();
-                            if (!renterName.contains("Not Available"))
+                            if ( !renterName.contains("Not Available") )
                             {
                                 renterName = "Renter -  " + renterName;
-                                newString ="Flat belongs to Owner " + member.get(position).getownername().toString() + " occupied by " + renterName+ ". " + "The Last Maintainance transactions was as follows:";
+                                //newString ="The Last Maintainance deposit detail from " + member.get(position).getownername().toString() + "/" + renterName+ "."  + String.valueOf(member.get(position).getownerid()) + " - " + String.valueOf(member.get(position).getfltid()) ;
+                                newString ="The Last Maintainance deposit detail from " + member.get(position).getownername().toString() + "/" + renterName+ ".";
                             }
                             else
                             {
                                 //renterName = "Self";
-                                newString ="Flat belongs to Owner " + member.get(position).getownername().toString() + ". " + "The Last Maintainance transactions was as follows:";
+                                //newString ="The Last Maintainance deposit detail from " + member.get(position).getownername().toString() + "."  + String.valueOf(member.get(position).getownerid()) + " - " + String.valueOf(member.get(position).getfltid()) ;
+                                newString ="The Last Maintainance deposit detail from " + member.get(position).getownername().toString() + ".";
                             }
 
-                            //newString.replace("[[ownername]]",member.get(position).getownername().toString());
-                            //newString.replace("[[self_renter]]",renterName.toString());
-                            //flatDescription.replace("[[ownername]]",member.get(position).getownername().toString());
-                            //flatDescription.replace("[[self_renter]]",renterName.toString() );
 
+                            txtfltdiscription.setText(newString);
                             txtfltdiscription.setVisibility(View.VISIBLE);
                             txtlastPaidEntrydt.setVisibility(View.VISIBLE);
                             txtlastPaidMonth.setVisibility(View.VISIBLE);
                             txtlastPaidYear.setVisibility(View.VISIBLE);
                             txtlastPaidAmount.setVisibility(View.VISIBLE);
                             txtlastPaidby.setVisibility(View.VISIBLE);
-                            descSeperator.setVisibility(View.VISIBLE);
 
-                            txtfltdiscription.setText(newString);
+                            String dateStr =member.get(position).getlastPaidEntrydt().toString();
+                            if (dateStr!="")
+                            {
+                                bubblecontentWithBackgrounddate.setVisibility(View.VISIBLE);
+                                bubblecontentWithBackgroundcash.setVisibility(View.VISIBLE);
+                            }
+                            else
+                            {
+                                bubblecontentWithBackgrounddate.setVisibility(View.INVISIBLE);
+                                bubblecontentWithBackgroundcash.setVisibility(View.INVISIBLE);
+                            }
+
+                            SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            SimpleDateFormat targetFormat = new SimpleDateFormat("EEEE, MMMM dd, yyyy hh:mm a" );
+                            Date date;
+                            String strTargetDate="";
+                            try {
+                                date = originalFormat.parse(dateStr);
+//                              System.out.println("Old Format :   " + originalFormat.format(date));
+//                              System.out.println("New Format :   " + targetFormat.format(date));
+                                strTargetDate = targetFormat.format(date).toString();
+                            } catch (ParseException ex) {
+                                Toast.makeText(maintainance.this,
+                                        "Last maintainance deposit detail not found!", Toast.LENGTH_LONG)
+                                        .show();
+                            }
+
                             txtlastPaidEntrydt.setText("Date : "
-                                    + member.get(position).getlastPaidEntrydt());
+                                    + strTargetDate);
                             txtlastPaidMonth.setText("Month : "
                                     + member.get(position).getlastPaidMonth());
                             txtlastPaidYear.setText("Year : "
@@ -599,5 +853,57 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
                cancel(true);
             }
         }
+    }
+
+
+    public void insert(View v) {
+
+        final GlobalClassMyApplication globalVariable = (GlobalClassMyApplication) getApplicationContext();
+
+        MPD.show();
+        //item_name = item_et.getText().toString();
+
+        StringRequest postRequest = new StringRequest(Request.Method.POST, globalVariable.URL_UPDATEMAINTAINANCE,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        MPD.dismiss();
+                        //item_et.setText("");
+                        Toast.makeText(getApplicationContext(),
+                                "Data Inserted Successfully",
+                                Toast.LENGTH_SHORT).show();
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                MPD.dismiss();
+                Toast.makeText(getApplicationContext(),
+                        "failed to insert", Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                //params.put("item_name", item_name);
+
+                params.put("mth","12");
+                params.put("yr","2015");
+                params.put("O_id",hashmapmaintaincneInput.get("OWNER_ID"));
+                params.put("f_id", hashmapmaintaincneInput.get("FLT_ID"));
+                params.put("amt", edtAmount.getText().toString());
+                params.put("pdby",my_paymodespinner.getSelectedItem().toString());
+
+                return params;
+            }
+        };
+
+        // Adding request to request queue
+        GlobalClassMyApplication.getInstance().addToReqQueue(postRequest);
+    }
+
+    public void read(View v) {
+        //Intent read_intent = new Intent(MainActivity.this, ReadData.class);
+        //startActivity(read_intent);
     }
 }

@@ -12,7 +12,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="Comment_hint">Enter post / comments </string>
     <string name="Lakshaya_postTitle">Post and Comments &#8230;</string>
-    <string name="FlatdescriptionwithLastTransaction">Flat belongs to Owner [[ownername]] occupied by [[self_renter]]. The Last Maintainance transactions was as follows:</string>
+    <string name="FlatdescriptionwithLastTransaction">The Last Maintainance deposit detail</string>
     <string name="Rs">\u20B9</string>
     <string name="rs">\u20A8</string>
 

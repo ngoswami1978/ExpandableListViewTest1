@@ -6,9 +6,11 @@
         android:minSdkVersion="16"
         android:targetSdkVersion="23" />
 
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name="com.neerajweb.expandablelistviewtest.Maintainance.GlobalClassMyApplication"
         android:icon="@drawable/user"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >

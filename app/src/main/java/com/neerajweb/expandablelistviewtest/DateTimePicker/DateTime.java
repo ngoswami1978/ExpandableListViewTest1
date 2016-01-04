@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * Created by Admin on 04/12/2015.
@@ -32,6 +33,7 @@ public class DateTime {
 
         mDate = date;
         mCalendar = Calendar.getInstance();
+        mCalendar.setTimeZone(TimeZone.getTimeZone("Asia/Calcutta"));
         mCalendar.setTime(mDate);
 
     }
@@ -81,6 +83,7 @@ public class DateTime {
                     int hourOfDay, int minuteOfHour, int secondOfMinute) {
 
         mCalendar = Calendar.getInstance();
+        mCalendar.setTimeZone(TimeZone.getTimeZone("Asia/Calcutta"));
         mCalendar.set(year, monthOfYear, dayOfMonth, hourOfDay, minuteOfHour, secondOfMinute);
         mDate = mCalendar.getTime();
 
