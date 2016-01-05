@@ -48,6 +48,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -89,6 +91,10 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
     boolean isSpinnerInitial ;
     View dialogView=null;
     boolean blnIsValidation;
+    boolean IsSaveMaintainance;
+
+    String mMonth;
+    String mYear;
 
     //Maintainance update progress dialog
     ProgressDialog MPD;
@@ -109,6 +115,7 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.maintainance);
+        IsSaveMaintainance=false;
 
         MPD = new ProgressDialog(this);
         MPD.setMessage("Updating please wait.....");
@@ -438,53 +445,67 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
         DateTime mDateTime = new DateTime(date);
         // Show in the LOGCAT the selected Date and Time
         Log.v("TEST_TAG", "Date and Time selected: " + mDateTime.getDateString());
+
         showMaintainanceEntryDialog(mDateTime.getMonthOfYear(), mDateTime.getYear());
     }
 
     public void showMaintainanceEntryDialog(int intMonth, int intYear) {
-
         try {
             AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
             LayoutInflater inflater = this.getLayoutInflater();
             dialogView = inflater.inflate(R.layout.maintainance_entry_dialog, null);
             dialogBuilder.setView(dialogView);
 
+            mYear =String.valueOf(intYear);
+
             switch (intMonth) {
                 case 0:
                     dialogBuilder.setIcon(R.drawable.jan);
+                    mMonth= String.valueOf("1");
                     break;
                 case 1:
                     dialogBuilder.setIcon(R.drawable.feb);
+                    mMonth= String.valueOf("2");
                     break;
                 case 2:
                     dialogBuilder.setIcon(R.drawable.mar);
+                    mMonth= String.valueOf("3");
                     break;
                 case 3:
                     dialogBuilder.setIcon(R.drawable.apr);
+                    mMonth= String.valueOf("4");
                     break;
                 case 4:
                     dialogBuilder.setIcon(R.drawable.may);
+                    mMonth= String.valueOf("5");
                     break;
                 case 5:
                     dialogBuilder.setIcon(R.drawable.jun);
+                    mMonth= String.valueOf("6");
                     break;
                 case 6:
                     dialogBuilder.setIcon(R.drawable.jul);
+                    mMonth= String.valueOf("7");
                     break;
                 case 7:
                     dialogBuilder.setIcon(R.drawable.aug);
+                    mMonth= String.valueOf("8");
                     break;
                 case 8:
                     dialogBuilder.setIcon(R.drawable.sep);
+                    mMonth= String.valueOf("9");
                     break;
                 case 9:
                     dialogBuilder.setIcon(R.drawable.oct);
+                    mMonth= String.valueOf("10");
                     break;
                 case 10:
                     dialogBuilder.setIcon(R.drawable.nov);
+                    mMonth= String.valueOf("11");
                     break;
                 case 11:
                     dialogBuilder.setIcon(R.drawable.dec);
+                    mMonth= String.valueOf("12");
                     break;
             }
 
@@ -555,11 +576,11 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
         }
     }
 
-//  CustomListener class used for validations
+//  CUSTOMLISTENER CLASS USED FOR VALIDATION AND CALL MAINTAINANCE WEBSERVICE
     class CustomListener implements View.OnClickListener {
-        private final Dialog dialog;
+        private final Dialog paydialog;
         public CustomListener(Dialog dialog) {
-            this.dialog = dialog;
+            this.paydialog = dialog;
         }
         @Override
         public void onClick(View v) {
@@ -570,8 +591,51 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
                 //edtAmount.setError("Please enter maintainance amount!"); //
                 //Toast.makeText(maintainance.this, "Invalid data", Toast.LENGTH_SHORT).show();
             } else {
-//              call maintainance deposit Web servicce here to insert deposit amount into server
-                insert(dialogView);
+
+                hashmapmaintaincneInput.put("AMOUNT", edtAmount.getText().toString());
+                hashmapmaintaincneInput.put("PAYBY", my_paymodespinner.getSelectedItem().toString());
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(maintainance.this);
+                // Setting Dialog Title
+                alertDialog.setTitle("Save Maintainance...");
+                // Setting Dialog Message
+                alertDialog.setMessage("Do you want to save maintainance  of flat " + hashmapmaintaincneInput.get("FLATNUMBER").toString() + " amounting to Rs." + hashmapmaintaincneInput.get("AMOUNT").toString());
+                // Setting Icon to Dialog
+                alertDialog.setIcon(R.drawable.save);
+
+                // Setting Positive "Yes" Button
+                alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // User pressed YES button. Write Logic Here
+                        //call maintainance deposit Web servicce here to insert deposit amount into server
+                        insert(dialogView,paydialog);
+//                        if (IsSaveMaintainance)
+//                        {
+//                            paydialog.dismiss();
+//                        }
+//                        Toast.makeText(getApplicationContext(), "You clicked on YES",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                // Setting Negative "NO" Button
+                alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // User pressed No button. Write Logic Here
+                        Toast.makeText(getApplicationContext(), "You clicked on NO", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                // Setting Netural "Cancel" Button
+                alertDialog.setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // User pressed Cancel button. Write Logic Here
+                        paydialog.dismiss();
+//                        Toast.makeText(getApplicationContext(), "You clicked on Cancel",
+//                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+                // Showing Alert Message
+                alertDialog.show();
                 //dialog.dismiss();
             }
         }
@@ -596,9 +660,9 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
         if(pos!=0)
         {
             String flat_type = mySpinner.getSelectedItem().toString();
-            Toast.makeText(this,
-                    "Thankyou for the maintainance payment of selected flat !!" + flat_type  , Toast.LENGTH_LONG)
-                    .show();
+//            Toast.makeText(this,
+//                    "Thankyou for the maintainance payment of selected flat !!" + flat_type  , Toast.LENGTH_LONG)
+//                    .show();
             isValidate=true;
             return isValidate;
         }
@@ -765,15 +829,25 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
                         else {
                             // Set the text followed by the position
 
+
+//                            hashmapmaintaincneInput.get("MONTH");
+//                            hashmapmaintaincneInput.get("YEAR");
+//                            mMonth= String.valueOf(intMonth);
+//                            mYear =String.valueOf(intYear);
+
                             // clear hash map
                             hashmapmaintaincneInput.clear();
 
+                            hashmapmaintaincneInput.put("MONTH", mMonth);
+                            hashmapmaintaincneInput.put("YEAR", mYear);
                             hashmapmaintaincneInput.put("FLT_ID", String.valueOf(member.get(position).getfltid()));
                             hashmapmaintaincneInput.put("OWNER_ID", String.valueOf(member.get(position).getownerid()) );
                             hashmapmaintaincneInput.put("OWNERNAME", member.get(position).getownername().toString());
                             hashmapmaintaincneInput.put("RENTERNAME", member.get(position).getrentername().toString());
                             hashmapmaintaincneInput.put("FLATNUMBER", member.get(position).getflatnumber().toString());
                             hashmapmaintaincneInput.put("FLATTYPE", member.get(position).getflattype().toString());
+                            mMonth= String.valueOf("");
+                            mYear = String.valueOf("");
 
                             flatDescription = txtfltdiscription.getText().toString();
                             String newString;
@@ -855,44 +929,62 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
         }
     }
 
-
-    public void insert(View v) {
-
+    public void insert(final View v,final Dialog PAYDIALOG) {
         final GlobalClassMyApplication globalVariable = (GlobalClassMyApplication) getApplicationContext();
-
+        IsSaveMaintainance=false;
         MPD.show();
         //item_name = item_et.getText().toString();
+        final String flat_type = mySpinner.getSelectedItem().toString();
 
         StringRequest postRequest = new StringRequest(Request.Method.POST, globalVariable.URL_UPDATEMAINTAINANCE,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         MPD.dismiss();
+                        PAYDIALOG.dismiss();
+                        IsSaveMaintainance=true;
                         //item_et.setText("");
-                        Toast.makeText(getApplicationContext(),
-                                "Data Inserted Successfully",
-                                Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(),
+//                                "Thankyou for the maintainance payment of selected flat !!" + flat_type
+//                                ,Toast.LENGTH_SHORT).show();
+
+                            AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                            builder.setTitle("Thankyou");
+                            builder.setMessage("Maintainance payment of flat " + flat_type + " done successfully!!");
+                            builder.setCancelable(true);
+                            final AlertDialog dlg = builder.create();
+                            dlg.show();
+                            final Timer t = new Timer();
+                            t.schedule(new TimerTask() {
+                                public void run() {
+                                    dlg.dismiss(); // when the task active then close the dialog
+                                    t.cancel(); // also just top the timer thread, otherwise, you may receive a crash report
+                                }
+                            }, 5000); // after 2 second (or 2000 miliseconds), the task will be active.
 
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 MPD.dismiss();
+                IsSaveMaintainance=false;
                 Toast.makeText(getApplicationContext(),
-                        "failed to insert", Toast.LENGTH_SHORT).show();
+                        "failed to update...", Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 //params.put("item_name", item_name);
+                //params.put("amt", edtAmount.getText().toString());
+                //params.put("pdby",my_paymodespinner.getSelectedItem().toString());
 
-                params.put("mth","12");
-                params.put("yr","2015");
+                params.put("mth",hashmapmaintaincneInput.get("MONTH"));
+                params.put("yr",hashmapmaintaincneInput.get("YEAR"));
                 params.put("O_id",hashmapmaintaincneInput.get("OWNER_ID"));
                 params.put("f_id", hashmapmaintaincneInput.get("FLT_ID"));
-                params.put("amt", edtAmount.getText().toString());
-                params.put("pdby",my_paymodespinner.getSelectedItem().toString());
+                params.put("amt", hashmapmaintaincneInput.get("AMOUNT"));
+                params.put("pdby",hashmapmaintaincneInput.get("PAYBY"));
 
                 return params;
             }
@@ -903,7 +995,7 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
     }
 
     public void read(View v) {
-        //Intent read_intent = new Intent(MainActivity.this, ReadData.class);
+        //Intent read_intent = new Intent(maintainance.this, ReadData.class);
         //startActivity(read_intent);
     }
 }
