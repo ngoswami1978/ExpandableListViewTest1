@@ -2,60 +2,60 @@
 <items version="2" >
 
     <item
-        jar="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
+        jar="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1-7c1c402c2cbd27b6193f1b068730e52a3db3c6e3.jar" />
-    </item>
-    <item
-        jar="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\debug\classes-feb25cb96ce2fe16cfdf3f1c6f3b9f488b378307.jar" />
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\release\classes-55e2cb5b54d143821f050764c1ba139fc42a7e5c.jar" />
     </item>
     <item
         jar="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\8.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
         sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
-        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\debug\classes-59dae9f7f22b8ef9861ff8a370651291eda49c3f.jar" />
-    </item>
-    <item
-        jar="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\debug\classes-4a555a446f60767e612a833b4f478294662e33e9.jar" />
+        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\release\classes-59dae9f7f22b8ef9861ff8a370651291eda49c3f.jar" />
     </item>
     <item
         jar="D:\AndroidStudioProjects\ExpandableListViewTest\app\libs\android-async-http-1.4.9.jar"
         jumboMode="false"
         revision="23.0.0"
         sha1="386a4339ffe52d5d63e80f9bed8d2b1d1a418249">
-        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\debug\android-async-http-1.4.9-e11d948c499dada9caa5ddb58a1436c46051e0a9.jar" />
+        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\release\android-async-http-1.4.9-e11d948c499dada9caa5ddb58a1436c46051e0a9.jar" />
     </item>
     <item
-        jar="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\jars\classes.jar"
+        jar="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
-        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
-        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\debug\classes-55e2cb5b54d143821f050764c1ba139fc42a7e5c.jar" />
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\release\classes-feb25cb96ce2fe16cfdf3f1c6f3b9f488b378307.jar" />
+    </item>
+    <item
+        jar="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\release\internal_impl-23.0.1-7c1c402c2cbd27b6193f1b068730e52a3db3c6e3.jar" />
     </item>
     <item
         jar="D:\android-sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
         jumboMode="false"
         revision="23.0.0"
         sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
-        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\debug\support-annotations-23.0.1-30988f1fe36b09fe750ef342667175c0af8e1dc8.jar" />
+        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\release\support-annotations-23.0.1-30988f1fe36b09fe750ef342667175c0af8e1dc8.jar" />
     </item>
     <item
         jar="D:\AndroidStudioProjects\ExpandableListViewTest\app\libs\com-mcxiaoke-volley.jar"
         jumboMode="false"
         revision="23.0.0"
         sha1="e40b9a81989bd4a846018551c280f8c4d837bf2e">
-        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\debug\com-mcxiaoke-volley-a7e1e92d1afc1a21f53cb27c7d815d8a3bdc4fa0.jar" />
+        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\release\com-mcxiaoke-volley-a7e1e92d1afc1a21f53cb27c7d815d8a3bdc4fa0.jar" />
+    </item>
+    <item
+        jar="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="D:\AndroidStudioProjects\ExpandableListViewTest\app\build\intermediates\pre-dexed\release\classes-4a555a446f60767e612a833b4f478294662e33e9.jar" />
     </item>
 
 </items>

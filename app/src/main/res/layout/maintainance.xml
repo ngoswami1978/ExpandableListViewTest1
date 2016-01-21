@@ -129,6 +129,14 @@
 
     </HorizontalScrollView>
 
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#00ff00">
+
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -137,86 +145,238 @@
         tools:context="me.vable.android.viewandlayoutlessons.FrameLayoutExampleActivity">
 
 
-        <TextView
-            android:id="@+id/tvDispMaint1"
-            android:text="JUL 2015"
-            android:textColor="@color/text_color"
-            android:textSize="12sp"
-            android:gravity="center"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:background="@drawable/textviewleftborder"
-            android:drawableRight="@drawable/shape_july"
-            android:layout_gravity="right|bottom"/>
+        <TableLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:shrinkColumns="*"
+            android:stretchColumns="*"
+            android:background="#b30000">
 
-        <TextView
-            android:id="@+id/tvDispMaint2"
-            android:text="AUG 2015"
-            android:textColor="@color/text_color"
-            android:textSize="12sp"
-            android:gravity="center"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="@drawable/textviewtopborder"
-            android:layout_gravity="left|bottom"
-            android:drawableLeft="@drawable/shape_aug"
-            />
+            <!-- Row 1 with single column -->
 
-        <TextView
-            android:id="@+id/tvDispMaint3"
-            android:text="OCT 2015"
-            android:textColor="@color/text_color"
-            android:textSize="12sp"
-            android:gravity="center"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="@drawable/textviewleftborder"
-            android:layout_gravity="right|center_vertical"
-            android:drawableRight="@drawable/shape_october"
-            />
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:gravity="center_horizontal">
 
-        <TextView
-            android:id="@+id/tvDispMaint4"
-            android:text="SEP 2015"
-            android:textColor="@color/text_color"
-            android:textSize="12sp"
-            android:gravity="center"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:background="@drawable/textviewtopborder"
-            android:layout_gravity="left|center_vertical"
-            android:textIsSelectable="false"
-            android:drawableLeft="@drawable/shape_sep"
-            />
+                <!--<TextView-->
+                    <!--android:id="@+id/tvDispMaintjan"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:drawablePadding="5dp"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:text="@string/hello_world"-->
+                    <!--android:textSize="14sp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:drawableLeft="@drawable/some_drawable"-->
+                    <!--/>-->
+
+                <TextView
+                    android:id="@+id/tvDispMaintjan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:layout_span="3"
+                    android:padding="18dip"
+                    android:text="JAN 2015"
+                    android:textColor="@color/text_color"
+                    android:drawableRight="@drawable/shape_january"
+                    android:layout_gravity="center|center"
+                    android:gravity="center"
+                    />
+
+            </TableRow>
+
+            <!-- Row 2 with 3 columns -->
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:id="@+id/tvDispMaintfeb"
+                    android:layout_weight="1"
+                    android:padding="10dip"
+
+                    android:background="@drawable/textviewrightborder"
+                    android:text="FEB 2015"
+                    android:textColor="@color/text_color"
+                    android:drawableBottom="@drawable/shape_february"
+                    android:layout_gravity="center|bottom"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/tvDispMaintmar"
+                    android:layout_weight="1"
+                    android:padding="10dip"
+
+                    android:background="@drawable/textviewrightborder"
+                    android:text="MAR 2015"
+                    android:textColor="@color/text_color"
+                    android:drawableBottom="@drawable/shape_march"
+                    android:layout_gravity="left|bottom"
+
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/tvDispMaintapr"
+                    android:layout_weight="1"
+                    android:padding="10dip"
+
+                    android:background="@drawable/textviewrightborder"
+                    android:text="APR 2015"
+                    android:textColor="@color/text_color"
+                    android:drawableBottom="@drawable/shape_april"
+                    android:layout_gravity="center|bottom"
+
+                    android:gravity="center"/>
+            </TableRow>
+
+            <!-- Row 3 with 2 columns -->
+
+            <TableRow
+
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/tvDispMaintmay"
+                    android:layout_weight="1"
+                    android:padding="18dip"
 
 
-        <TextView
-            android:id="@+id/tvDispMaint5"
-            android:text="NOV 2015"
-            android:textColor="@color/text_color"
-            android:textSize="12sp"
-            android:gravity="center"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:background="@drawable/textviewleftborder"
-            android:layout_gravity="right|center_horizontal"
-            android:textIsSelectable="false"
-            android:drawableRight="@drawable/shape_nov"
-            />
+                    android:background="@drawable/textviewrightborder"
+                    android:text="MAY 2015"
+                    android:textColor="@color/text_color"
+                    android:drawableRight="@drawable/shape_may"
+                    android:layout_gravity="right|bottom"
 
-        <TextView
-            android:id="@+id/tvDispMaint6"
-            android:text="DEC 2015"
-            android:textColor="@color/text_color"
-            android:textSize="12sp"
-            android:gravity="center"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="@drawable/textviewrightborder"
-            android:layout_gravity="left|center_horizontal"
-            android:textIsSelectable="false"
-            android:allowUndo="false"
-            android:clickable="false"
-            android:drawableLeft="@drawable/shape_dec"/>
+
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tvDispMaintjun"
+                    android:layout_weight="1"
+                    android:padding="18dip"
+
+                    android:background="@drawable/textviewrightborder"
+                    android:text="JUN 2015"
+                    android:textColor="@color/text_color"
+                    android:drawableRight="@drawable/shape_june"
+                    android:layout_gravity="right|bottom"
+
+                    android:gravity="center"/>
+            </TableRow>
+
+
+            <!-- Row 4 with single column -->
+
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/tvDispMaintjul"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18dp"
+                    android:layout_span="3"
+                    android:padding="18dip"
+
+                    android:background="@drawable/textviewleftborder"
+                    android:text="JUL 2015"
+                    android:textColor="@color/text_color"
+                    android:drawableRight="@drawable/shape_july"
+                    android:layout_gravity="left|bottom"
+                    android:gravity="center"
+                    />
+
+            </TableRow>
+
+            <!-- Row 5 with 3 columns -->
+
+            <TableRow
+                android:id="@+id/tableRow5"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:id="@+id/tvDispMaintaug"
+                    android:layout_weight="1"
+                    android:padding="20dip"
+
+                    android:background="@drawable/textviewrightborder"
+                    android:text="AUG 2015"
+                    android:textColor="@color/text_color"
+                    android:drawableBottom="@drawable/shape_aug"
+                    android:layout_gravity="left|bottom"
+
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/tvDispMaintsep"
+                    android:layout_weight="1"
+                    android:padding="20dip"
+
+                    android:background="@drawable/textviewrightborder"
+                    android:text="SEP 2015"
+                    android:textColor="@color/text_color"
+                    android:drawableBottom="@drawable/shape_sep"
+                    android:layout_gravity="left|bottom"
+
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/tvDispMaintoct"
+                    android:layout_weight="1"
+                    android:padding="10dip"
+
+                    android:background="@drawable/textviewrightborder"
+                    android:text="OCT 2015"
+                    android:textColor="@color/text_color"
+                    android:drawableBottom="@drawable/shape_october"
+                    android:layout_gravity="center|bottom"
+
+                    android:gravity="center"/>
+            </TableRow>
+
+            <!-- Row 6 with 2 columns -->
+
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/tvDispMaintnov"
+                    android:layout_weight="1"
+                    android:padding="18dip"
+
+                    android:background="@drawable/textviewrightborder"
+                    android:text="NOV 2015"
+                    android:textColor="@color/text_color"
+                    android:drawableRight="@drawable/shape_nov"
+                    android:layout_gravity="left|bottom"
+
+                    android:gravity="center"/>
+
+                <TextView
+                    android:id="@+id/tvDispMaintdec"
+                    android:layout_weight="1"
+                    android:padding="18dip"
+
+                    android:background="@drawable/textviewrightborder"
+                    android:text="DEC 2015"
+                    android:textColor="@color/text_color"
+                    android:drawableRight="@drawable/shape_dec"
+                    android:layout_gravity="left|bottom"
+
+                    android:gravity="center"/>
+            </TableRow>
+
+        </TableLayout>
+
     </FrameLayout>
+    </ScrollView>
 </LinearLayout>

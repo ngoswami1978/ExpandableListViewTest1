@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:shrinkColumns="*"
+    android:stretchColumns="*"
+    android:background="#b30000">
+
+    <!-- Row 1 with single column -->
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:layout_span="3"
+            android:padding="18dip"
+
+            android:background="@drawable/textviewrightborder"
+            android:text="JAN 2015"
+            android:textColor="@color/text_color"
+            android:drawableRight="@drawable/shape_january"
+            android:layout_gravity="right|bottom"
+            android:gravity="center"
+            />
+
+    </TableRow>
+
+    <!-- Row 2 with 3 columns -->
+
+    <TableRow
+        android:background="@drawable/textviewtopborder"
+        android:id="@+id/tableRow1"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <TextView
+            android:id="@+id/TextView0201"
+            android:layout_weight="1"
+            android:padding="10dip"
+
+            android:background="@drawable/textviewrightborder"
+            android:text="FEB 2015"
+            android:textColor="@color/text_color"
+            android:drawableRight="@drawable/shape_february"
+            android:layout_gravity="right|bottom"
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/TextView0202"
+            android:layout_weight="1"
+            android:padding="10dip"
+
+            android:background="@drawable/textviewrightborder"
+            android:text="MAR 2015"
+            android:textColor="@color/text_color"
+            android:drawableRight="@drawable/shape_march"
+            android:layout_gravity="right|bottom"
+
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/TextView0203"
+            android:layout_weight="1"
+            android:padding="10dip"
+
+            android:background="@drawable/textviewrightborder"
+            android:text="APR 2015"
+            android:textColor="@color/text_color"
+            android:drawableRight="@drawable/shape_april"
+            android:layout_gravity="right|bottom"
+
+            android:gravity="center"/>
+    </TableRow>
+
+    <!-- Row 3 with 2 columns -->
+
+    <TableRow
+        android:background="@drawable/textviewtopborder"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/TextView0301"
+            android:layout_weight="1"
+            android:padding="18dip"
+
+
+            android:background="@drawable/textviewrightborder"
+            android:text="MAY 2015"
+            android:textColor="@color/text_color"
+            android:drawableRight="@drawable/shape_may"
+            android:layout_gravity="right|bottom"
+
+
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/TextView0302"
+            android:layout_weight="1"
+            android:padding="18dip"
+
+            android:background="@drawable/textviewrightborder"
+            android:text="JUN 2015"
+            android:textColor="@color/text_color"
+            android:drawableRight="@drawable/shape_june"
+            android:layout_gravity="right|bottom"
+
+            android:gravity="center"/>
+    </TableRow>
+
+
+    <!-- Row 4 with single column -->
+
+    <TableRow
+        android:background="@drawable/textviewtopborder"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:layout_span="3"
+            android:padding="18dip"
+
+            android:background="@drawable/textviewleftborder"
+            android:text="JUL 2015"
+            android:textColor="@color/text_color"
+            android:drawableRight="@drawable/shape_july"
+            android:layout_gravity="left|bottom"
+            android:gravity="center"
+            />
+
+    </TableRow>
+
+    <!-- Row 5 with 3 columns -->
+
+    <TableRow
+        android:id="@+id/tableRow5"
+        android:background="@drawable/textviewtopborder"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+
+        <TextView
+            android:id="@+id/TextView0501"
+            android:layout_weight="1"
+            android:padding="20dip"
+
+            android:background="@drawable/textviewrightborder"
+            android:text="AUG 2015"
+            android:textColor="@color/text_color"
+            android:drawableRight="@drawable/shape_aug"
+            android:layout_gravity="left|bottom"
+
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/TextView0502"
+            android:layout_weight="1"
+            android:padding="20dip"
+
+            android:background="@drawable/textviewrightborder"
+            android:text="SEP 2015"
+            android:textColor="@color/text_color"
+            android:drawableRight="@drawable/shape_sep"
+            android:layout_gravity="left|bottom"
+
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/TextView0503"
+            android:layout_weight="1"
+            android:padding="20dip"
+
+            android:background="@drawable/textviewrightborder"
+            android:text="OCT 2015"
+            android:textColor="@color/text_color"
+            android:drawableRight="@drawable/shape_october"
+            android:layout_gravity="left|bottom"
+
+            android:gravity="center"/>
+    </TableRow>
+
+    <!-- Row 6 with 2 columns -->
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:background="@drawable/textviewtopborder"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/TextView0601"
+            android:layout_weight="1"
+            android:padding="18dip"
+
+            android:background="@drawable/textviewrightborder"
+            android:text="NOV 2015"
+            android:textColor="@color/text_color"
+            android:drawableRight="@drawable/shape_nov"
+            android:layout_gravity="left|bottom"
+
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/TextView0602"
+            android:layout_weight="1"
+            android:padding="18dip"
+
+            android:background="@drawable/textviewrightborder"
+            android:text="DEC 2015"
+            android:textColor="@color/text_color"
+            android:drawableRight="@drawable/shape_dec"
+            android:layout_gravity="left|bottom"
+
+            android:gravity="center"/>
+    </TableRow>
+
+</TableLayout>

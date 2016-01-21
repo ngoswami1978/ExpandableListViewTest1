@@ -17,6 +17,7 @@
         <activity
             android:name=".maintainance"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

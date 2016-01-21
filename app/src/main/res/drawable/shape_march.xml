@@ -5,12 +5,15 @@
             <solid android:color="@color/red"/>
         </shape>
     </item>
-    <item
-        android:drawable="@drawable/mar"
-        android:width="20dp"
-        android:height="20dp"
-        android:bottom="20dp"
-        android:left="20dp"
-        android:right="20dp"
-        android:top="20dp"/>
+    <item>
+        <rotate
+            android:drawable="@drawable/monthlyreport_tv"
+            android:startOffset="0"
+            android:duration="10000"
+            android:fromDegrees="0"
+            android:interpolator="@android:anim/linear_interpolator"
+            android:pivotX="50%"
+            android:pivotY="50%"
+            android:toDegrees="360"/>
+    </item>
 </layer-list>
