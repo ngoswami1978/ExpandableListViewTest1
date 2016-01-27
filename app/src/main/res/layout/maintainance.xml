@@ -161,30 +161,48 @@
                 android:gravity="center_horizontal">
 
                 <!--<TextView-->
-                    <!--android:id="@+id/tvDispMaintjan"-->
+                    <!--android:id="@+id/tvDispMaintreportText"-->
                     <!--android:layout_width="match_parent"-->
                     <!--android:layout_height="wrap_content"-->
-                    <!--android:drawablePadding="5dp"-->
-                    <!--android:gravity="center_vertical"-->
-                    <!--android:text="@string/hello_world"-->
-                    <!--android:textSize="14sp"-->
-                    <!--android:textStyle="bold"-->
-                    <!--android:drawableLeft="@drawable/some_drawable"-->
-                    <!--/>-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:textColor="@color/text_color"-->
+                    <!--android:drawableBottom="@drawable/monthlyreport_text"-->
+                    <!--android:layout_gravity="left|left"-->
+                    <!--android:gravity="center"/>-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/ivrpt"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:src="@drawable/monthlyreport_text" />-->
+
+                <com.neerajweb.expandablelistviewtest.TouchImageView
+                    android:id="@+id/ivrpt"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:clickable="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/monthlyreport_text" />
+
 
                 <TextView
                     android:id="@+id/tvDispMaintjan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="18dp"
-                    android:layout_span="3"
-                    android:padding="18dip"
+                    android:padding="10dip"
                     android:text="JAN 2015"
+                    android:background="@drawable/textviewleftborder"
                     android:textColor="@color/text_color"
                     android:drawableRight="@drawable/shape_january"
                     android:layout_gravity="center|center"
-                    android:gravity="center"
-                    />
+                    android:gravity="center"/>
 
             </TableRow>
 
@@ -245,28 +263,22 @@
                     android:id="@+id/tvDispMaintmay"
                     android:layout_weight="1"
                     android:padding="18dip"
-
-
                     android:background="@drawable/textviewrightborder"
                     android:text="MAY 2015"
                     android:textColor="@color/text_color"
                     android:drawableRight="@drawable/shape_may"
                     android:layout_gravity="right|bottom"
-
-
                     android:gravity="center"/>
 
                 <TextView
                     android:id="@+id/tvDispMaintjun"
                     android:layout_weight="1"
                     android:padding="18dip"
-
                     android:background="@drawable/textviewrightborder"
                     android:text="JUN 2015"
                     android:textColor="@color/text_color"
                     android:drawableRight="@drawable/shape_june"
                     android:layout_gravity="right|bottom"
-
                     android:gravity="center"/>
             </TableRow>
 
@@ -285,12 +297,11 @@
                     android:textSize="18dp"
                     android:layout_span="3"
                     android:padding="18dip"
-
                     android:background="@drawable/textviewleftborder"
                     android:text="JUL 2015"
                     android:textColor="@color/text_color"
                     android:drawableRight="@drawable/shape_july"
-                    android:layout_gravity="left|bottom"
+                    android:layout_gravity="center|center"
                     android:gravity="center"
                     />
 

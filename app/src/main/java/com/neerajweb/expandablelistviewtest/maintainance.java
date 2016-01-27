@@ -2,11 +2,15 @@ package com.neerajweb.expandablelistviewtest;
 
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.PointF;
+import android.graphics.RectF;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -16,8 +20,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.FloatMath;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
@@ -127,6 +133,7 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
 
     private Animation rotation;
     private AnimationDrawable d;
+    TextView textviewRpt;
     TextView textviewjan;
     TextView textviewfeb;
     TextView textviewmar;
@@ -139,6 +146,8 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
     TextView textviewoct;
     TextView textviewnov;
     TextView textviewdec;
+
+    Drawable[] myTextViewCompoundDrawablesRPT;
     Drawable[] myTextViewCompoundDrawablesJAN;
     Drawable[] myTextViewCompoundDrawablesFEB;
     Drawable[] myTextViewCompoundDrawablesMAR;
@@ -151,6 +160,19 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
     Drawable[] myTextViewCompoundDrawablesOCT;
     Drawable[] myTextViewCompoundDrawablesNOV;
     Drawable[] myTextViewCompoundDrawablesDEC;
+
+
+    ImageView imageDetail;
+    Matrix matrix = new Matrix();
+    Matrix savedMatrix = new Matrix();
+    PointF startPoint = new PointF();
+    PointF midPoint = new PointF();
+    float oldDist = 1f;
+    static final int NONE = 0;
+    static final int DRAG = 1;
+    static final int ZOOM = 2;
+    int mode = NONE;
+
 
     int MAX_LEVEL;
 
@@ -217,6 +239,8 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
         imageViewDEC.setImageDrawable(getResources().getDrawable(R.drawable.decgray));
         enableDisableMonth(imageViewDEC, intCurrentMonth, 11);
 
+//        textviewRpt = (TextView) findViewById(R.id.tvDispMaintreportText);
+
         textviewjan= (TextView) findViewById(R.id.tvDispMaintjan);
         textviewfeb= (TextView) findViewById(R.id.tvDispMaintfeb);
         textviewmar= (TextView) findViewById(R.id.tvDispMaintmar);
@@ -230,6 +254,7 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
         textviewnov= (TextView) findViewById(R.id.tvDispMaintnov);
         textviewdec= (TextView) findViewById(R.id.tvDispMaintdec);
 
+//        myTextViewCompoundDrawablesRPT = textviewRpt.getCompoundDrawables();
         myTextViewCompoundDrawablesJAN = textviewjan.getCompoundDrawables();
         myTextViewCompoundDrawablesFEB = textviewfeb.getCompoundDrawables();
         myTextViewCompoundDrawablesMAR = textviewmar.getCompoundDrawables();
@@ -247,6 +272,20 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
 
 //        enableDisableMonthReportIcon(false);
 
+
+        final TouchImageView touchimage = (TouchImageView) findViewById(R.id.ivrpt);
+        touchimage.setOnTouchImageViewListener(new TouchImageView.OnTouchImageViewListener() {
+            @Override
+            public void onMove() {
+                RectF rect = touchimage.getZoomedRect();
+                float currentZoom = touchimage.getCurrentZoom();
+                boolean  isZoomed = touchimage.isZoomed();
+                //Log.e("sfsdfdsf", ""+currentZoom+","+isZoomed);
+                //Do whater ever stuff u want
+            }
+        });
+
+
         paymentcard.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -254,8 +293,7 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
             }
         });
 
-
-        textviewjan.setOnClickListener(new OnClickListener() {
+            textviewjan.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 //                enableDisableMonthReportIcon(false);
@@ -269,13 +307,13 @@ public class maintainance extends ActionBarActivity implements DateTimePicker.On
 //                    }
 
                     //----------------Round Moving clock wise animation code------------------------
-              for(Drawable drawable: myTextViewCompoundDrawablesJAN) {
-              if(drawable == null)
-                  continue;
-                  ObjectAnimator anim = ObjectAnimator.ofInt(drawable, "level", 0, MAX_LEVEL);
-                  //anim.setRepeatCount(Animation.INFINITE);
-                  anim.start();
-                  }
+//              for(Drawable drawable: myTextViewCompoundDrawablesJAN) {
+//              if(drawable == null)
+//                  continue;
+//                  ObjectAnimator anim = ObjectAnimator.ofInt(drawable, "level", 0, MAX_LEVEL);
+//                  //anim.setRepeatCount(Animation.INFINITE);
+//                  anim.start();
+//                  }
 
                 textviewjan.setCompoundDrawablesWithIntrinsicBounds( 0, 0,R.drawable.monthlyreport_book, 0);
                 myTextViewCompoundDrawablesJAN = textviewjan.getCompoundDrawables();
